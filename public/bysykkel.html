@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 
-<map name="topmenu">
-<area href="#" alt="Instruksjoner" SHAPE="RECT" COORDS="26,0,140,39" onclick="window.open('http://www.polymath.no/cc/instruksjoner.html','instruksjoner','height=400,width=600,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,location=no,directories=no,status=no');">
-</map>
+<!--<map name="topmenu">-->
+<!--<area href="#" alt="Instruksjoner" SHAPE="RECT" COORDS="26,0,140,39" onclick="window.open('http://www.polymath.no/cc/instruksjoner.html','instruksjoner','height=400,width=600,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,location=no,directories=no,status=no');">-->
+<!--</map>-->
 
     <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA5k-CDz8hVoLQHnxx88Wu5xRvdx7768sqVseDSlZcRbkERFDXXBRvLM268OGHvS6W7RzqY45RicH9bw"
                 type="text/javascript"></script>
@@ -37,7 +37,7 @@
 	            } catch (e) {}
 	         }
 	      }
-	      if (!http_request) {
+	      if (!http_request) {<
 	         alert('Cannot create XMLHTTP instance');
 	         return false;
 	      }
@@ -155,7 +155,7 @@ var map0;
           var letteredIcon = new GIcon(baseIcon);
           //letteredIcon.image = "ccmarker2.png";
           iii = 1;
-          letteredIcon.image = "http://www.adshel.no/js/images/ccmarker"+stationnr+".png";
+          letteredIcon.image = "http://www.adshel.no/js/images/ccmarker"+index+1+".png";
           // Set up our GMarkerOptions object
           markerOptions = { icon:letteredIcon };
           var marker = new GMarker(point, markerOptions);
