@@ -1,0 +1,2 @@
+module FetchXmlHelper
+end

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<string xmlns="http://smartbikeportal.clearchannel.no/public/mobapp/">
+  <station>
+    <ready_bikes>0</ready_bikes>
+    <empty_locks>15</empty_locks>
+    <online>0</online>
+    <description>03-Prinsensgt. (Kirkegt.)</description>
+    <longitute>10.74413537979126</longitute>
+    <latitude>59.91124491211972</latitude>
+  </station>
+</string><?xml version="1.0" encoding="utf-8"?>
