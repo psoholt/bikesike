@@ -16,7 +16,7 @@
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
   adapter: sqlite3
-  encoding: utf8
+  encoding: unicode
   reconnect: false
   database: helloworld_development
   pool: 5
@@ -38,11 +38,12 @@ test:
   host: localhost
 
 production:
-  adapter: sqlite3
-  encoding: utf8
-  reconnect: false
-  database: helloworld_production
-  pool: 5
-  username: root
-  password: 
-  host: localhost
+  adapter: postgresql
+  encoding: unicode
+#  reconnect: false
+  database: qjtuktxcno
+#  pool: 5
+  port: 5432
+  username: qjtuktxcno
+  password: f5lxx1zz5pnorynqglhzmsp34
+  host: ec2-184-72-230-125.compute-1.amazonaws.com
