@@ -5,14 +5,14 @@ include REXML
 require "../models/bike_station"
 class Execute
   public
-  def self.webOpenXML(number)
+  def Execute.web_open_xml(number)
     open("http://www.adshel.no/js/getracknr.php?id="+number.to_s)
   end
 
   def Execute.get_stativ_textxml_web (number)
     tekst = ""
-    webOpenXML(number) do | web |
-      web.each_line { |f| tekst+= f } #unless f.nil? }
+    web_open_xml(number) do | web |
+      web.each_line { |f| tekst+= f }
     end
     tekst
   end
@@ -20,12 +20,12 @@ class Execute
   def Execute.get_stativ_xml
     tekst = ""
     data = yield
-    data.each_line { |f| tekst+= f } #unless f.nil? }
+    data.each_line { |f| tekst+= f }
     Document.new(tekst)
   end 
 
-  def Execute.get_bike_station
-    BikeStation.new(Execute.get_stativ_xml { yield } )
+  def Execute.get_bike_station(id)
+    BikeStation.new(Execute.get_stativ_xml { yield(id) }, id )
   end
 
 
@@ -44,7 +44,6 @@ class Execute
 end
 
 
-bike = Execute.get_bike_station { Execute.file_open_xml(3) }
+bike = Execute.get_bike_station(3) {|id| Execute.file_open_xml(id) }
 puts bike
-
 
