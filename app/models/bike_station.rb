@@ -1,24 +1,30 @@
-require 'rubygems'
-require 'dm-core'
-require 'dm-migrations'
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://bikesike.db')
+#require 'rubygems'
+#require 'dm-core'
+#require 'dm-migrations'
+##DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite::memory:')
+#DataMapper.setup(:default, 'sqlite::memory:')
+##DataMapper::Logger.new($stdout)
 
-class BikeStation
-  include DataMapper::Resource
-  property :id, Integer, :key => true
-  property :online, Boolean
-  property :ready_bikes, Integer
-  property :empty_locks, Integer
-  property :description, Text
-  property :longitude, String
-  property :latitude, String
-  property :created_at, DateTime
+class BikeStation << ActiveREcord::Base
+#  include DataMapper::Resource
+#  property :id, Integer, :key => true
+#  property :online, Boolean
+#  property :ready_bikes, Integer
+#  property :empty_locks, Integer
+#  property :description, Text
+#  property :longitude, String
+#  property :latitude, String
+#  property :created_at, DateTime
   
-  attr_reader :online, :ready_bikes, :empty_locks
+  attr_accessor :online, :ready_bikes, :empty_locks
 
   #@online = "hei"
   #@@static_variable = "statisk variabel"
   #$global_variable = "global variabel"
+
+  def initialize(&block)
+    instance_eval &block
+  end
 
   def initialize(doc, id)
     @id = id
@@ -36,4 +42,5 @@ class BikeStation
   end
 end
 
-DataMapper.auto_migrate!
+#DataMapper.finalize
+#DataMapper.auto_migrate!

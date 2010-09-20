@@ -45,5 +45,11 @@ end
 
 
 bike = Execute.get_bike_station(3) {|id| Execute.file_open_xml(id) }
+bike.save
+
 puts bike
+
+bike2 = BikeStation.get(3)
+puts "hei"
+puts bike2
 
