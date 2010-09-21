@@ -25,7 +25,8 @@ class Execute
   end 
 
   def Execute.get_bike_station(id)
-    BikeStation.new(Execute.get_stativ_xml { yield(id) }, id )
+    #BikeStation.new(Execute.get_stativ_xml { yield(id) }, id )
+    BikeStation.initialize_from_xml(Execute.get_stativ_xml { yield(id) }, id )
   end
 
 
@@ -44,12 +45,23 @@ class Execute
 end
 
 
+DataMapper::Logger.new($stdout, :debug)
 bike = Execute.get_bike_station(3) {|id| Execute.file_open_xml(id) }
-bike.save
+#bikehei = BikeStation.create(:stativ_nr => 3, :online=>true)
+puts "YOYOYOYO"+ bike.to_s
+biktest =BikeStation.first(:stativ_nr =>3)
+puts "HALLLOOO" + biktest.to_s
 
-puts bike
-
-bike2 = BikeStation.get(3)
-puts "hei"
-puts bike2
-
+#bikehei = BikeStation.create(:stativ_nr => 2, :online=>true)
+#bikehei = BikeStation.create(:stativ_nr => 1, :online=>true)
+#
+#puts bikehei
+#puts bikehei.update(:ready_bikes=>4)
+#puts bike
+##puts bike.save.to_s
+#
+#
+#bike2 = BikeStation.get(3)
+#puts "hei"
+#puts bike2
+#
