@@ -54,13 +54,19 @@ class BikeStation  #<< ActiveREcord::Base
 #    puts bike
 
     updated = bike2.update(stativ_nr => id,
-    :online => bike.online,
-    :ready_bikes => bike.ready_bikes,
-    :empty_locks => bike.empty_locks,
-    :description => bike.description,
-    :longitude => bike.longitude,
-    :latitude => bike.latitude)
-    bike2
+      :online => bike.online,
+      :ready_bikes => bike.ready_bikes,
+      :empty_locks => bike.empty_locks,
+      :description => bike.description,
+      :longitude => bike.longitude,
+      :latitude => bike.latitude)
+
+    puts updated.to_s
+    puts "saved bike"+bike2.to_s
+    bike2 = find(:stativ_nr => id).each do |hei|
+      puts hei.to_s
+    end
+    puts "loaded bike" + bike2.to_s
 #    bike = get(id)
 #    puts bike
 #    bike.stativ_nr = id
@@ -70,7 +76,7 @@ class BikeStation  #<< ActiveREcord::Base
 #    doc.elements.each('string/station/description') {|tag| bike.description = tag.text}
 #    doc.elements.each('string/station/longitute') {|tag| bike.longitude = tag.text}
 #    doc.elements.each('string/station/latitude') {|tag| bike.latitude = tag.text}
-#    bike
+    bike2
   end
 
   def to_s

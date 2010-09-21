@@ -2,7 +2,7 @@
 require 'open-uri'
 require 'rexml/document'
 include REXML
-require "../models/bike_station"
+require_relative "../models/bike_station"
 class Execute
   public
   def Execute.web_open_xml(number)
@@ -30,38 +30,15 @@ class Execute
   end
 
 
-  def Execute.file_open_xml (number)
-    File.read("bikexmlexample"+number.to_s+".xml")
+  def Execute.file_open_xml (number, relative_path )
+    File.read(relative_path+"bikexmlexample"+number.to_s+".xml")
   end
 
-  def Execute.get_stativ_textxml_from_file (number)
+  def Execute.get_stativ_textxml_from_file (number, relative_path)
     tekst = ""
-    file_open_xml(number) do | data |
+    file_open_xml(number, relative_path) do | data |
       data.each_line { |f| tekst+= f } # unless f.nil? }
     end
     tekst
   end
-
 end
-
-
-DataMapper::Logger.new($stdout, :debug)
-bike = Execute.get_bike_station(3) {|id| Execute.file_open_xml(id) }
-#bikehei = BikeStation.create(:stativ_nr => 3, :online=>true)
-puts "YOYOYOYO"+ bike.to_s
-biktest =BikeStation.first(:stativ_nr =>3)
-puts "HALLLOOO" + biktest.to_s
-
-#bikehei = BikeStation.create(:stativ_nr => 2, :online=>true)
-#bikehei = BikeStation.create(:stativ_nr => 1, :online=>true)
-#
-#puts bikehei
-#puts bikehei.update(:ready_bikes=>4)
-#puts bike
-##puts bike.save.to_s
-#
-#
-#bike2 = BikeStation.get(3)
-#puts "hei"
-#puts bike2
-#
