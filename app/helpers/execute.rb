@@ -25,7 +25,6 @@ class Execute
   end 
 
   def Execute.get_bike_station(id)
-    #BikeStation.new(Execute.get_stativ_xml { yield(id) }, id )
     Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml { yield(id) }, id )
   end
 
@@ -42,8 +41,7 @@ class Execute
     tekst
   end
 
-    def Execute.initialize_bikestation_from_xml(doc, id)
-#    bike2 = BikeStation.first_or_create(:stativ_nr => id )
+  def Execute.initialize_bikestation_from_xml(doc, id)
 
     bike = BikeStation.new
     bike.stativ_nr = id
@@ -53,22 +51,6 @@ class Execute
     doc.elements.each('string/station/description') {|tag| bike.description = tag.text}
     doc.elements.each('string/station/longitute') {|tag| bike.longitude = tag.text}
     doc.elements.each('string/station/latitude') {|tag| bike.latitude = tag.text}
-#    puts bike
-
-#    updated = bike2.update(:stativ_nr => id,
-#      :online => bike.online,
-#      :ready_bikes => bike.ready_bikes,
-#      :empty_locks => bike.empty_locks,
-#      :description => bike.description,
-#      :longitude => bike.longitude,
-#      :latitude => bike.latitude)
-#
-#    puts updated.to_s
-#    puts "saved bike"+bike2.to_s
-#    bike2 = find(:stativ_nr => id).each do |hei|
-#      puts hei.to_s
-#    end
-#    puts "loaded bike" + bike2.to_s
 
     bike
   end
