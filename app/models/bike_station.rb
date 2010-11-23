@@ -4,7 +4,7 @@ class BikeStation
   attr_accessor :stativ_nr,:online, :ready_bikes, :empty_locks, :longitude, :latitude, :description
   attr_reader :time_created
 
-  def Initialize
+  def initialize
     @time_created = Time.now
   end
 

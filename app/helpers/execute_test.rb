@@ -34,7 +34,9 @@ class ExecuteTest < Test::Unit::TestCase
     sleep 3
     seconds = bikestation.seconds_since_creation
     puts seconds
-    assert_true(seconds>=2)
+    result = seconds>=2
+    assert_equal true, result
+#    assert_compare(2,">=",seconds)
   end
 
 end
