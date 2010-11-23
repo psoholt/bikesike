@@ -4,12 +4,12 @@ require_relative '../../app/helpers/execute.rb'
 
 class BikeStationTest < Test::Unit::TestCase
   # Replace this with your real tests.
-  setup do
-    DataMapper::Logger.new($stdout, :debug)
-    DataMapper.setup(:default, 'sqlite::memory:')
+  def setup
+#    DataMapper::Logger.new($stdout, :debug)
+#    DataMapper.setup(:default, 'sqlite::memory:')
   end
 
-  test "the truth" do
+  def test_the_truth
 
     bike_station = Execute.get_bike_station(3) {|id| Execute.file_open_xml(id, File.dirname($0)+"/../../app/Helpers/") }
     #bikehei = BikeStation.create(:stativ_nr => 3, :online=>true)

@@ -16,15 +16,11 @@ class ExecuteTest < Test::Unit::TestCase
     # Do nothing
   end
 
-  # Fake test
-  def test_fail
-
-    # To change this template use File | Settings | File Templates.
-    fail("Not implemented")
-  end
 
   def test_read_xml_file
-    assert_not_nil(Execute.file_open_xml(3))
+    bikesite3 = Execute.file_open_xml(3, "./")
+    assert_not_nil(bikesite3)
   end
+
 
 end
