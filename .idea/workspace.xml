@@ -118,7 +118,7 @@
       <file leaf-file-name="fetch_xml_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/fetch_xml_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="16" selection-start="206" selection-end="206" vertical-scroll-proportion="0.20877193">
+            <state line="12" column="3" selection-start="241" selection-end="241" vertical-scroll-proportion="0.35789475">
               <folding />
             </state>
           </provider>
@@ -127,7 +127,7 @@
       <file leaf-file-name="bike_station.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/bike_station.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="5" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
+            <state line="2" column="0" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -355,6 +355,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Helpers" />
               <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.UnclassifiedHelpersFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bikesike" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="helloworld" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Models" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ModelsFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BikeStation" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ClassNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1012,13 +1030,6 @@
         <state line="1" column="7" selection-start="93" selection-end="93" vertical-scroll-proportion="-0.44444445" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/bike_station.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="5" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/helpers/bikexmlexample2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="0" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0">
@@ -1054,9 +1065,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/bike_station.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/fetch_xml_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="16" selection-start="206" selection-end="206" vertical-scroll-proportion="0.20877193">
+        <state line="12" column="3" selection-start="241" selection-end="241" vertical-scroll-proportion="0.35789475">
           <folding />
         </state>
       </provider>
