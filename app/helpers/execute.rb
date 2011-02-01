@@ -17,15 +17,15 @@ class Execute
     tekst
   end
 
-  def Execute.get_stativ_xml
+  def Execute.get_stativ_xml(data)
     tekst = ""
-    data = yield
+    data = Execute.web_open_xml(id) if data.nil?
     data.each_line { |f| tekst+= f }
     Document.new(tekst)
   end 
 
   def Execute.get_bike_station(id)
-    Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml { yield(id) }, id )
+    Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(yield(id)) , id )
   end
 
 
@@ -45,6 +45,8 @@ class Execute
 
     bike = BikeStation.new
     bike.stativ_nr = id
+    bike.empty_locks = bike.ready_bikes = 0
+    bike.online = false
     doc.elements.each('string/station/online') {|tag| bike.online =  "0".eql?(tag.text)}
     doc.elements.each('string/station/ready_bikes') {|tag| bike.ready_bikes = tag.text.to_i}
     doc.elements.each('string/station/empty_locks') {|tag| bike.empty_locks = tag.text.to_i}
