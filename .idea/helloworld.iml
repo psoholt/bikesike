@@ -12,72 +12,72 @@
   <component name="GemRequirementsHolder" version="3">
     <requirement>
       <requirement>
-        <dependency name="archive-tar-minitar" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="archive-tar-minitar" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="columnize" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="columnize" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="linecache19" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="linecache19" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="pg" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="pg" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="config/database.yml" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="rails" version="2.3.8" bound="EQUAL" git="false" />
+        <dependency name="rails" version="2.3.8" bound="EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="config/environment.rb" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="rails" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="rails" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="config/boot.rb" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="ruby-debug-base19" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="ruby-debug-base19" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="ruby-debug-ide19" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="ruby-debug-ide19" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="ruby-debug19" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="ruby-debug19" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="ruby_core_source" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="ruby_core_source" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="sqlite3-ruby" version="0" bound="GREATER_OR_EQUAL" git="false" />
+        <dependency name="sqlite3-ruby" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="config/database.yml" />
     </requirement>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
@@ -105,11 +105,11 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/sqlite3-ruby-1.3.2-x86-mingw32)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] archive-tar-minitar (v0.5.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/archive-tar-minitar-0.5.2)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] columnize (v0.3.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/columnize-0.3.1)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] ruby_core_source (v0.1.4, C:/Ruby191/lib/ruby/gems/1.9.1/gems/ruby_core_source-0.1.4)" level="application" />
     <orderEntry type="library" name="[gem] linecache19 (v0.5.11, null)" level="application" />
     <orderEntry type="library" name="[gem] ruby-debug-base19 (v0.11.23, null)" level="application" />
     <orderEntry type="library" name="[gem] ruby-debug-ide19 (v0.4.12, null)" level="application" />
     <orderEntry type="library" name="[gem] ruby-debug19 (v0.11.6, null)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] ruby_core_source (v0.1.4, C:/Ruby191/lib/ruby/gems/1.9.1/gems/ruby_core_source-0.1.4)" level="application" />
   </component>
 </module>
 

@@ -16,7 +16,6 @@ class ExecuteTest < Test::Unit::TestCase
     # Do nothing
   end
 
-
   def test_read_xml_file
     bikesite3 = Execute.file_open_xml(3, "./")
     assert_not_nil(bikesite3)
