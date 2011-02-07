@@ -29,13 +29,13 @@ class Execute
   end
 
 
-  def Execute.file_open_xml (number, relative_path )
+  def Execute.open_xml_from_file (number, relative_path = "./" )
     File.read(relative_path+"bikexmlexample"+number.to_s+".xml")
   end
 
   def Execute.get_stativ_textxml_from_file (number, relative_path)
     tekst = ""
-    file_open_xml(number, relative_path) do | data |
+    open_xml_from_file(number, relative_path) do | data |
       data.each_line { |f| tekst+= f } # unless f.nil? }
     end
     tekst

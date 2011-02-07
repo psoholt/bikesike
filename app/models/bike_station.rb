@@ -1,4 +1,8 @@
-class BikeStation 
+require 'json'
+require 'auto_json.rb'
+
+class BikeStation
+  include AutoJson
   attr_accessor :stativ_nr,:online, :ready_bikes, :empty_locks, :longitude, :latitude, :description
   attr_reader :time_created
 
@@ -11,8 +15,17 @@ class BikeStation
   ", Posisjon: " + (@longitude||"null") +", " + (@latitude||"nil") + "\n\t" + (@description||"")
   end
 
+  def to_json *a
+    variables = instance_variable_as_hash
+    variables.delete(:time_created.to_s)
+    variables.to_json *a
+  end
+
+  def as_json *a
+    instance_values
+  end
+
   def seconds_since_creation
     Time.now.to_i- @time_created.to_i
   end
-
 end

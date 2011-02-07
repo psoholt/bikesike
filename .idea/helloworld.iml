@@ -110,6 +110,8 @@
     <orderEntry type="library" name="[gem] ruby-debug-base19 (v0.11.23, null)" level="application" />
     <orderEntry type="library" name="[gem] ruby-debug-ide19 (v0.4.12, null)" level="application" />
     <orderEntry type="library" name="[gem] ruby-debug19 (v0.11.6, null)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/sqlite3-ruby-1.3.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3 (v1.3.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/sqlite3-1.3.3-x86-mingw32)" level="application" />
   </component>
 </module>
 
