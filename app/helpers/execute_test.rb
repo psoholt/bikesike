@@ -1,4 +1,5 @@
 require_relative "execute.rb"
+require_relative "cache_helper.rb"
 require "test/unit"
 
 class ExecuteTest < Test::Unit::TestCase
@@ -42,7 +43,7 @@ class ExecuteTest < Test::Unit::TestCase
   def test_get_seconds_from_creation_of_bikestation
     bikestation = BikeStation.new
     bikestation.description = "Lalala"
-    bikestation.stativ_nr = 1
+    bikestation.id = 1
     sleep 3
     seconds = bikestation.seconds_since_creation
     puts seconds
@@ -51,12 +52,18 @@ class ExecuteTest < Test::Unit::TestCase
 #    assert_compare(2,">=",seconds)
   end
 
-  def test_fetchjson_open_xml_from_file
+  def test_fetchjson_open_xml_from_file_ShouldNotThrowException
     bike = Execute.get_bike_station(3) {|id| Execute.open_xml_from_file(id, File.dirname($0)+"/") }
-    puts bike.as_json
     puts bike.to_json
-    #fetchXmlController =  FetchXmlController.new
-    #puts fetchXmlController.fetchjson_fromfile(3)
+  end
+
+  def test_caching
+    bike = Execute.get_bike_station(3) {|id| Execute.open_xml_from_file(id, File.dirname($0)+"/") }
+    bike2 = Execute.get_bike_station(2) {|id| Execute.open_xml_from_file(id, File.dirname($0)+"/") }
+    cache_helper = CacheHelper.new
+    cache_helper.put bike
+    cache_helper.put bike
+    cache_helper.put bike2
   end
 
 end
