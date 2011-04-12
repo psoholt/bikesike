@@ -43,8 +43,7 @@ class Execute
 
   def Execute.initialize_bikestation_from_xml(doc, id)
 
-    bike = BikeStation.new
-    bike.id = id
+    bike = BikeStation.new(id)
     bike.empty_locks = bike.ready_bikes = 0
     bike.online = false
     doc.elements.each('string/station/online') {|tag| bike.online =  "0".eql?(tag.text)}

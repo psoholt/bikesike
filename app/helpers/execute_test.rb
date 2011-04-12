@@ -41,15 +41,13 @@ class ExecuteTest < Test::Unit::TestCase
   end
 
   def test_get_seconds_from_creation_of_bikestation
-    bikestation = BikeStation.new
+    bikestation = BikeStation.new(1)
     bikestation.description = "Lalala"
-    bikestation.id = 1
     sleep 3
     seconds = bikestation.seconds_since_creation
     puts seconds
     result = seconds>=2
     assert_equal true, result
-#    assert_compare(2,">=",seconds)
   end
 
   def test_fetchjson_open_xml_from_file_ShouldNotThrowException
@@ -64,6 +62,12 @@ class ExecuteTest < Test::Unit::TestCase
     cache_helper.put bike
     cache_helper.put bike
     cache_helper.put bike2
+    bike_from_hash = cache_helper.get 2
+    assert_equal bike_from_hash, bike2
+    puts bike_from_hash
+    assert_equal bike_from_hash.id, 2
+    bike_from_hash_second = cache_helper.get 3
+    puts bike_from_hash_second
   end
 
 end

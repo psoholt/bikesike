@@ -6,8 +6,9 @@ class BikeStation
   attr_accessor :id, :online, :ready_bikes, :empty_locks, :longitude, :latitude, :description
   attr_reader :time_created
 
-  def initialize
+  def initialize(id)
     @time_created = Time.now
+    @id = id;
   end
 
   def to_s
