@@ -22,6 +22,12 @@ class BikeStation
     variables.to_json *a
   end
 
+  def to_xml *a
+    variables = instance_variable_as_hash
+    variables.delete(:time_created.to_s)
+    variables.to_xml *a
+  end
+
   def seconds_since_creation
     Time.now.to_i- @time_created.to_i
   end

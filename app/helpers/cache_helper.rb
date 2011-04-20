@@ -17,5 +17,4 @@ class CacheHelper
     return nil if bikeStation.seconds_since_creation > @@cache_time_seconds
     bikeStation
   end
-
 end
