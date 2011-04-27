@@ -941,3 +941,346 @@ Completed in 661ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjs
 Processing ApplicationController#getjson to xml (for 127.0.0.1 at 2011-04-20 15:20:21) [GET]
   Parameters: {"id"=>"15"}
 Completed in 361ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.xml]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 16:08:25) [GET]
+  Parameters: {"id"=>"1"}
+Completed in 364ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/1.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 18:51:19) [GET]
+  Parameters: {"id"=>"1"}
+Completed in 882ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/1.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 18:51:30) [GET]
+  Parameters: {"id"=>"1"}
+Completed in 646ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/1.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 18:53:36) [GET]
+  Parameters: {"id"=>"2"}
+
+ArgumentError (wrong number of arguments (1 for 3)):
+  app/models/bike_station.rb:9:in `initialize'
+  app/helpers/execute.rb:46:in `new'
+  app/helpers/execute.rb:46:in `initialize_bikestation_from_xml'
+  app/helpers/execute.rb:28:in `get_bike_station'
+  app/controllers/application_controller.rb:11:in `getjson'
+  <internal:prelude>:10:in `synchronize'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/httpserver.rb:111:in `service'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/httpserver.rb:70:in `run'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (42.2ms)
+Rendered rescues/_request_and_response (1.1ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 18:54:02) [GET]
+  Parameters: {"id"=>"2"}
+
+ArgumentError (wrong number of arguments (1 for 3)):
+  app/models/bike_station.rb:9:in `initialize'
+  app/helpers/execute.rb:46:in `new'
+  app/helpers/execute.rb:46:in `initialize_bikestation_from_xml'
+  app/helpers/execute.rb:28:in `get_bike_station'
+  app/controllers/application_controller.rb:11:in `getjson'
+  <internal:prelude>:10:in `synchronize'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/httpserver.rb:111:in `service'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/httpserver.rb:70:in `run'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (40.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 19:34:22) [GET]
+  Parameters: {"id"=>"2"}
+Completed in 2110ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/2.json]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:34:34) [GET]
+
+TypeError (can't convert Float into String):
+  app/models/bike_station.rb:16:in `+'
+  app/models/bike_station.rb:16:in `to_s'
+  app/controllers/application_controller.rb:26:in `puts'
+  app/controllers/application_controller.rb:26:in `puts'
+  app/controllers/application_controller.rb:26:in `getmany'
+  <internal:prelude>:10:in `synchronize'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/httpserver.rb:111:in `service'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/httpserver.rb:70:in `run'
+  /opt/local/lib/ruby1.9/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (15.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:35:25) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:35:44) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 19:36:49) [GET]
+  Parameters: {"id"=>"1"}
+Completed in 253ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/1.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 19:36:51) [GET]
+  Parameters: {"id"=>"2"}
+Completed in 265ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/2.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-20 19:36:55) [GET]
+  Parameters: {"id"=>"2"}
+Completed in 259ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/2.json]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:38:56) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:44:05) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:47:42) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:47:55) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:55:58) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:56:19) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:56:27) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:56:38) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:57:17) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:57:37) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:58:38) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 19:59:39) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:05:57) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:17:35) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:18:54) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:19:24) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:19:57) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:21:26) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:22:26) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:22:52) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:31:47) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:34:33) [GET]
+Completed in 10ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:35:11) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:37:17) [GET]
+Completed in 33ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:37:30) [GET]
+Completed in 9ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:38:06) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:38:38) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:39:14) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:41:10) [GET]
+Completed in 9ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-20 20:47:47) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:09:21) [GET]
+Completed in 47ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:19:02) [GET]
+Completed in 13ms (View: 4, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 192.168.0.20 at 2011-04-26 09:32:24) [GET]
+Completed in 6ms (View: 1, DB: 0) | 200 OK [http://192.168.0.15/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:39:33) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:41:49) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:43:39) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:44:39) [GET]
+Completed in 13ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 192.168.0.20 at 2011-04-26 09:45:56) [GET]
+Completed in 6ms (View: 1, DB: 0) | 200 OK [http://192.168.0.15/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:49:50) [GET]
+Completed in 14ms (View: 4, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 09:51:38) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 10:13:33) [GET]
+Completed in 10ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 10:14:22) [GET]
+Completed in 11ms (View: 4, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 10:18:37) [GET]
+Completed in 13ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 22:58:16) [GET]
+Completed in 12ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 23:31:16) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 23:34:09) [GET]
+Completed in 9ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 10.0.0.5 at 2011-04-26 23:35:19) [GET]
+Completed in 7ms (View: 1, DB: 0) | 200 OK [http://10.0.0.8/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 23:37:32) [GET]
+Completed in 56ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 23:37:49) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 23:59:35) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-26 23:59:51) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 00:00:36) [GET]
+Completed in 11ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 00:01:05) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 00:01:43) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 00:02:19) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 00:02:40) [GET]
+Completed in 11ms (View: 4, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 00:02:57) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 07:49:28) [GET]
+Completed in 188ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 07:50:21) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 07:51:08) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]
+
+
+Processing ApplicationController#getmany (for 127.0.0.1 at 2011-04-27 07:53:39) [GET]
+Completed in 8ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getmany]

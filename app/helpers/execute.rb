@@ -6,7 +6,7 @@ require_relative "../models/bike_station"
 class Execute
   public
   def Execute.web_open_xml(number)
-    open("http://www.adshel.no/js/getracknr.php?id="+number.to_s)
+    open("http://smartbikeportal.clearchannel.no/public/mobapp/maq.asmx/getRack?id="+number.to_s)
   end
 
   def Execute.get_stativ_textxml_web (number)
