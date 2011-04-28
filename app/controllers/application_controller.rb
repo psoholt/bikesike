@@ -1,5 +1,3 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
 require_relative "../helpers/execute.rb"
 
 class ApplicationController < ActionController::Base
@@ -7,10 +5,7 @@ class ApplicationController < ActionController::Base
 #  protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   def getjson
-#    puts params
     @bike_station = Execute.get_bike_station(params[:id]) {|id| Execute.web_open_xml(params[:id]) }
-
-    #puts @bike_station
 
     respond_to do |format|
         format.xml  { render :xml => @bike_station }
