@@ -941,3 +941,33 @@ Completed in 661ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjs
 Processing ApplicationController#getjson to xml (for 127.0.0.1 at 2011-04-20 15:20:21) [GET]
   Parameters: {"id"=>"15"}
 Completed in 361ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.xml]
+
+
+Processing ApplicationController#getjson to xml (for 127.0.0.1 at 2011-04-26 16:51:14) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 424ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.xml]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-26 16:51:38) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 464ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-26 16:52:00) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 489ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-26 16:52:02) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 386ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.json]
+
+
+Processing ApplicationController#getjson to json (for 127.0.0.1 at 2011-04-26 16:52:47) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 482ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.json]
+
+
+Processing ApplicationController#getjson to xml (for 127.0.0.1 at 2011-04-26 16:52:53) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 392ms (View: 1, DB: 0) | 200 OK [http://localhost/application/getjson/15.xml]
