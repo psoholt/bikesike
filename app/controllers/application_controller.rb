@@ -10,42 +10,27 @@ class ApplicationController < ActionController::Base
 #    puts params
     @bike_station = Execute.get_bike_station(params[:id]) {|id| Execute.web_open_xml(params[:id]) }
 
-    #puts @bike_station
-
     respond_to do |format|
         format.xml  { render :xml => @bike_station }
         format.json { render :json => @bike_station }
     end
   end
 
+# def getallfromlocation (topLeft, bottomRight)
+# return json with locks and bikes for all stations
+
   def getmany
-#    puts params
-    @bs1 = BikeStation.new(1)
-    @bs1.longitude = "10.709009170532226"
-    @bs1.latitude = "59.92786125852981"
+    # med id, long, lat (+ bikes and locks and online)
+    #@allstations = Execute.get_all_stations()
 
-    @bs2 = BikeStation.new(2)
-    @bs2.longitude = "10.708515644073486"
-    @bs2.latitude = "59.92805479800621"
-
-    @bs3 = BikeStation.new(3)
-    @bs3.longitude = "10.74413537979126"
-    @bs3.latitude = "59.91124491211972"
-
-    @bs4 = BikeStation.new(4)
-    @bs4.longitude = "10.73866"
-    @bs4.latitude = "59.92268"
-
-#    puts @bs1
+    @racks = []
+    (1..108).each do |i|
+    #(1..10).each do |i|
+      @racks << BikeStation.new(i)
+    end
     
-    @bike = [@bs1, @bs2, @bs3, @bs4]
-    #, BikeStation.new(2), BikeStation.new(3), BikeStation.new(4) ]
-#    @bike_station = Execute.get_bike_station(params[:id]) {|id| Execute.web_open_xml(params[:id]) }
-
-    #puts @bike_station
-
     respond_to do |format|
-        format.json { render :json => @bike }
+        format.json { render :json => @racks }
     end
   end
 end
