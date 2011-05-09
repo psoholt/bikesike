@@ -12,6 +12,12 @@
   <component name="GemRequirementsHolder" version="3">
     <requirement>
       <requirement>
+        <dependency name="bundler" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source manual="true" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="bysykkel" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="GEMFILE" />
@@ -28,12 +34,6 @@
       </requirement>
       <source from="GEMFILE" />
       <source from="config/environment.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rails" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source from="config/boot.rb" />
     </requirement>
   </component>
   <component name="NewModuleRootManager">
@@ -59,6 +59,7 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] mime-types (v1.16, /opt/local/lib/ruby1.9/gems/1.9.1/gems/mime-types-1.16)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] nokogiri (v1.4.4, /opt/local/lib/ruby1.9/gems/1.9.1/gems/nokogiri-1.4.4)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] typhoeus (v0.2.4, /opt/local/lib/ruby1.9/gems/1.9.1/gems/typhoeus-0.2.4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.0.13, /opt/local/lib/ruby1.9/gems/1.9.1/gems/bundler-1.0.13)" level="application" />
   </component>
 </module>
 
