@@ -31,33 +31,32 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] rake (v0.8.7, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rake-0.8.7)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.0, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.1.0)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/sqlite3-ruby-1.3.1-x86-mingw32)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] actionpack (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/actionpack-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activeresource-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] actionmailer (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/actionmailer-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] rails (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rails-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] test-unit (v2.1.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/test-unit-2.1.1)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] addressable (v2.2.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/addressable-2.2.1)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] data_objects (v0.10.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/data_objects-0.10.2)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] dm-core (v1.0.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/dm-core-1.0.2)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] dm-do-adapter (v1.0.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/dm-do-adapter-1.0.2)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] dm-sqlite-adapter (v1.0.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/dm-sqlite-adapter-1.0.2)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] do_sqlite3 (v0.10.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/do_sqlite3-0.10.2-x86-mingw32)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] extlib (v0.9.15, C:/Ruby191/lib/ruby/gems/1.9.1/gems/extlib-0.9.15)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/sqlite3-ruby-1.3.2-x86-mingw32)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] archive-tar-minitar (v0.5.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/archive-tar-minitar-0.5.2)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] columnize (v0.3.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/columnize-0.3.1)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] ruby_core_source (v0.1.4, C:/Ruby191/lib/ruby/gems/1.9.1/gems/ruby_core_source-0.1.4)" level="application" />
-    <orderEntry type="library" name="[gem] linecache19 (v0.5.11, null)" level="application" />
-    <orderEntry type="library" name="[gem] ruby-debug-base19 (v0.11.23, null)" level="application" />
-    <orderEntry type="library" name="[gem] ruby-debug-ide19 (v0.4.12, null)" level="application" />
-    <orderEntry type="library" name="[gem] ruby-debug19 (v0.11.6, null)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/sqlite3-ruby-1.3.3)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3 (v1.3.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/sqlite3-1.3.3-x86-mingw32)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.0, /Users/peder/.gem/ruby/1.9.1/gems/rack-1.1.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.1, /Users/peder/.gem/ruby/1.9.1/gems/sqlite3-ruby-1.3.1)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] actionpack (v2.3.8, /opt/local/lib/ruby1.9/gems/1.9.1/gems/actionpack-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v2.3.8, /opt/local/lib/ruby1.9/gems/1.9.1/gems/activeresource-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] actionmailer (v2.3.8, /opt/local/lib/ruby1.9/gems/1.9.1/gems/actionmailer-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v2.3.8, /opt/local/lib/ruby1.9/gems/1.9.1/gems/activerecord-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v2.3.8, /opt/local/lib/ruby1.9/gems/1.9.1/gems/activesupport-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rails (v2.3.8, /opt/local/lib/ruby1.9/gems/1.9.1/gems/rails-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] test-unit (v2.1.1, /opt/local/lib/ruby1.9/gems/1.9.1/gems/test-unit-2.1.1)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] data_objects (v0.10.2, /opt/local/lib/ruby1.9/gems/1.9.1/gems/data_objects-0.10.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] dm-core (v1.0.2, /opt/local/lib/ruby1.9/gems/1.9.1/gems/dm-core-1.0.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] dm-do-adapter (v1.0.2, /opt/local/lib/ruby1.9/gems/1.9.1/gems/dm-do-adapter-1.0.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] dm-sqlite-adapter (v1.0.2, /opt/local/lib/ruby1.9/gems/1.9.1/gems/dm-sqlite-adapter-1.0.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] do_sqlite3 (v0.10.2, /opt/local/lib/ruby1.9/gems/1.9.1/gems/do_sqlite3-0.10.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] extlib (v0.9.15, /opt/local/lib/ruby1.9/gems/1.9.1/gems/extlib-0.9.15)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.2, /Users/peder/.gem/ruby/1.9.1/gems/sqlite3-ruby-1.3.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] archive-tar-minitar (v0.5.2, /Users/peder/.gem/ruby/1.9.1/gems/archive-tar-minitar-0.5.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] columnize (v0.3.1, /Users/peder/.gem/ruby/1.9.1/gems/columnize-0.3.1)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] ruby_core_source (v0.1.4, /Users/peder/.gem/ruby/1.9.1/gems/ruby_core_source-0.1.4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] linecache19 (v0.5.11, /opt/local/lib/ruby1.9/gems/1.9.1/gems/linecache19-0.5.11)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] ruby-debug-base19 (v0.11.23, /opt/local/lib/ruby1.9/gems/1.9.1/gems/ruby-debug-base19-0.11.23)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] ruby-debug-ide19 (v0.4.12, /opt/local/lib/ruby1.9/gems/1.9.1/gems/ruby-debug-ide19-0.4.12)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] ruby-debug19 (v0.11.6, /opt/local/lib/ruby1.9/gems/1.9.1/gems/ruby-debug19-0.11.6)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.3, /opt/local/lib/ruby1.9/gems/1.9.1/gems/sqlite3-ruby-1.3.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3 (v1.3.3, /opt/local/lib/ruby1.9/gems/1.9.1/gems/sqlite3-1.3.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rake (v0.8.7, /opt/local/lib/ruby1.9/gems/1.9.1/gems/rake-0.8.7)" level="application" />
   </component>
 </module>
 

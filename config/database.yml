@@ -44,6 +44,6 @@ production:
   database: qjtuktxcno
 #  pool: 5
   port: 5432
-  username: qjtuktxcno
-  password: f5lxx1zz5pnorynqglhzmsp34
-  host: ec2-184-72-230-125.compute-1.amazonaws.com
+  username: asdf
+  password: asdf
+  host: localhost
