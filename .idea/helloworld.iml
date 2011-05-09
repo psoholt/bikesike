@@ -14,19 +14,19 @@
       <requirement>
         <dependency name="bysykkel" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
-      <source from="GemFile" />
+      <source from="GEMFILE" />
     </requirement>
     <requirement>
       <requirement>
         <dependency name="json" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
-      <source from="GemFile" />
+      <source from="GEMFILE" />
     </requirement>
     <requirement>
       <requirement>
         <dependency name="rails" version="2.3.8" bound="EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
-      <source from="GemFile" />
+      <source from="GEMFILE" />
       <source from="config/environment.rb" />
     </requirement>
     <requirement>
