@@ -69,4 +69,9 @@ class ExecuteTest < Test::Unit::TestCase
     bike_from_hash_second = cache_helper.get 3
     puts bike_from_hash_second
   end
+
+  def test_racks
+    
+  end
+  
 end
