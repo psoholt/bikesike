@@ -1,6 +1,6 @@
 require_relative "../helpers/execute.rb"
 
-class ApplicationController < ActionController::Base
+class BysykkelController < ActionController::Base
 #  helper :all # include all helpers, all the time
 #  protect_from_forgery # See ActionController::RequestForgeryProtection for details
 

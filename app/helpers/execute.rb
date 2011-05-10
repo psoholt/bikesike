@@ -1,5 +1,5 @@
 #http://scrumy.com/nuke54tumbril
-require 'bysykkel'
+#require 'bysykkel'
 require 'open-uri'
 require 'rexml/document'
 include REXML
@@ -74,13 +74,14 @@ class Execute
     bike
   end
 
-#  def Execute.initialize_bikestations_from_xml(doc)
-#    doc.elements.each('string') { |tag|
-#      puts tag.text.gsub("&lt;", "<").gsub("&gt;", ">")
-#    }
-#
-#    "bike"
-#  end
+    def Execute.initialize_bikestations_from_xml(doc)
+
+    doc.elements.each('station') { |tag|
+      puts tag.text.gsub("&lt;", "<").gsub("&gt;", ">")
+    }
+
+    "bike"
+  end
 
   def Execute.racks
     Bysykkel::Rack.all
