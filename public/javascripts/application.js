@@ -113,7 +113,7 @@ var BikeSike = Class.create({
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
 		}
-		
+		return;
 		// logging stuff
 		var visible = 0;
 		this.racks.each(function(rack) {
@@ -130,7 +130,7 @@ var BikeSike = Class.create({
 						bodyHeight = $(document.body).getHeight(),
 						lHeight = $("locate").getHeight(),
 						diff = bodyHeight - iwHeight -lHeight;
-//					alert("iwW: " + iwWidth + ", iwH: " + iwHeight + ", body: " + bodyHeight + ", locate: " + lHeight + ", diff: " + diff);
+					alert("iwW: " + iwWidth + ", iwH: " + iwHeight + ", body: " + bodyHeight + ", locate: " + lHeight + ", diff: " + diff);
 				}, 1000);
 			}
 		});
@@ -295,7 +295,7 @@ var Rack = Class.create({
 		this.events = {};
 		
 		if (!this.initMarker()) {
-			this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+			this.requestData();
 		}
 	},
 	initMarker: function() {
@@ -323,7 +323,16 @@ var Rack = Class.create({
 			this.marker.setVisible(visibility);
 		}
 	},
+	requestData: function() {
+		this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+		if (this.infoWindow) {
+			$(this.infoWindow.getContent()).addClassName("loading");
+		}
+	},
 	updateDataFromAjax: function(jsonData) {
+		if (this.infoWindow) {
+			$(this.infoWindow.getContent()).removeClassName("loading");
+		}
 		this.updateProperty("bikes",       jsonData.ready_bikes);
 		this.updateProperty("locks",       jsonData.empty_locks);
 		this.updateProperty("description", jsonData.description);
@@ -346,7 +355,7 @@ var Rack = Class.create({
 		}
 	},
 	markerClickHandler: function() {
-		this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+		this.requestData();
 		if (!this.infoWindow) {
 			var element = new Element("div");
 			element.insert(this.toHTML());
@@ -396,6 +405,7 @@ var Rack = Class.create({
 						'</span>',
 					'</li>',
 				'</ul>',
+				'<div class="load"></div>',
 			'</div>'
 		].join('');
 	},

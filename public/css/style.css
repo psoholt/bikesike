@@ -20,6 +20,19 @@ body { height: 100%; margin: 0px; padding: 0px }
 	max-height: 192px;
 	position: relative;
 }
+.load {
+	display: none;
+}
+.rack.loading .load {
+	display: block;
+	background: rgba(255,255,255,.5) url(/images/loading.gif) no-repeat 50% 50%;
+	position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
 .rack p {
 	position: absolute;
 	background: #fff;
