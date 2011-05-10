@@ -104,7 +104,7 @@ var BikeSike = Class.create({
 				sw = bounds.getSouthWest(),
 				coords = $H({"sw": sw.lat() + "," + sw.lng(), "ne": ne.lat() + "," + ne.lng()}).toQueryString();
 			//log("Diagonal distance at zoom level ", this.map.getZoom(), ": ", google.maps.geometry.spherical.computeDistanceBetween(sw, ne));
-			new Ajax.Request('/application/getallfromlocation?' + coords, {
+			new Ajax.Request('/bysykkel/getallfromlocation?' + coords, {
 				method: 'get',
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
@@ -112,7 +112,7 @@ var BikeSike = Class.create({
 	},
 	initRacks: function() {
 		this.racks = $A();
-		new Ajax.Request('/application/getmany', {
+		new Ajax.Request('/bysykkel/getmany', {
 			method:'get',
 			onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 		});
@@ -195,7 +195,7 @@ var RackProvider = Class.create({
 		this.mode = getMode;
 	},
 	getRackData: function(id, callback) {
-		new Ajax.Request('/application/getjson/' + id + '.json', {
+		new Ajax.Request('/bysykkel/getjson/' + id + '.json', {
 			method:'get',
 			onSuccess: function(transport){
 				var json = transport.responseText.evalJSON();
@@ -231,7 +231,6 @@ var RackProvider = Class.create({
 			(app.mode === "BIKES" && providerData.bikes > 0) ||
 			(app.mode === "LOCKS" && providerData.locks > 0);
 	}
-	
 });
 
 var Rack = Class.create({
