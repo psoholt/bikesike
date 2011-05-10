@@ -12,13 +12,13 @@ class CacheHelper
   end
 
   def get(id)
-    bikeStation = @bikehash[id]
-    return nil if bikeStation.nil?
-    return nil if bikeStation.seconds_since_creation > @@cache_time_seconds
-    bikeStation
+    bike_station = @bikehash[id]
+    return nil if bike_station.nil?
+    return nil if bike_station.seconds_since_creation > @@cache_time_seconds
+    bike_station
   end
 
-  def getAll
-    return @bikehash
+  def get_all
+    @bikehash
   end
 end
