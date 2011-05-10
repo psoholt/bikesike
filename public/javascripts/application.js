@@ -2,87 +2,194 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 function log() {
-	if (app && app.debug && window.console && window.console.log) {
+	if (window.app && window.app.debug && window.console && window.console.log) {
 		try {
 			console.log.apply(this, arguments);
 		} catch (e) {}
 	}
 }
 
-var BikeSyke = Class.create({
+document.observe("dom:loaded", function() {
+	window.app = new BikeSike("BOTH");
+});
+
+var BikeSike = Class.create({
 	debug: true,
-	useStreetview: false,
 	config: {
-		defaultCenter: new google.maps.LatLng(59.5658, 10.4523)
+		defaultZoom: 13,
+		defaultCenter: new google.maps.LatLng(59.91130774, 10.75086325),
+		maxDistance: 10000
 	},
-	initialize: function() {
+	initialize: function(mode) {
+		this.mode = mode; // BOTH, BIKES, LOCKS
 		
+		this.initMap();
+		
+		this.rackProvider = new RackProvider(this.map, function() {
+			return this.mode;
+		}.bind(this));
+		
+		this.initRacks();
+	},
+	initMap: function () {
+		var myOptions = {
+			center: this.config.defaultCenter,
+			zoom: this.config.defaultZoom,
+			scaleControl: true,
+			navigationControl: true,
+			mapTypeControl: false,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		this.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+		var map = this.map;
+		
+		this.updatePositionUsingGeolocation();
+
+		this.initBoundsChangedHandler();
+		
+		this.initZoomEvents();
+		
+		this.addModeControls();
+		
+		this.addLocationControl();
+	},
+	addLocationControl: function() {
+		if (navigator.geolocation) {
+			var locate = $("locate");
+			locate.observe("click", function(event) {
+				event.stop();
+				this.updatePositionUsingGeolocation();
+			}.bindAsEventListener(this));
+			this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locate);
+		}
+	},
+	addModeControls: function() {
+		var controlDiv = $("modeControls");
+		var controls = controlDiv.select(".control");
+		controls.invoke("observe", "click", function(event) {
+			event.stop();
+			var target = $(event.target);
+			if (target.hasClassName("active") || target.hasClassName("disabled")) {
+				return;
+			}
+			var mode = target.getAttribute("data-mode");
+			this.setMode(mode);
+			controls.invoke("removeClassName", "active");
+			target.addClassName("active");
+		}.bindAsEventListener(this));
+		this.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(controlDiv);
+	},
+	initZoomEvents: function() {
+		google.maps.event.addListener(this.map, 'zoom_changed', function() {
+			var zoom = this.map.getZoom();
+			$$(".zoomed"  ).invoke(zoom < 14 ? "addClassName" : "removeClassName", "disabled");
+			$$(".unzoomed").invoke(zoom < 14 ? "removeClassName" : "addClassName", "disabled");
+			if (zoom < 14) {
+				this.setMode("BOTH");
+			}
+		}.bindAsEventListener(this));
+	},
+	initBoundsChangedHandler: function() {
+		var mapChangedTimer;
+		google.maps.event.addListener(this.map, 'bounds_changed', function(e) {
+			clearTimeout(mapChangedTimer);
+			mapChangedTimer = setTimeout(this.mapBoundsChanged.bind(this), 50);
+		}.bindAsEventListener(this));
+	},
+	mapBoundsChanged: function() {
+		if (this.mode !== "BOTH") {
+			var bounds = this.map.getBounds(),
+				ne = bounds.getNorthEast(),
+				sw = bounds.getSouthWest(),
+				coords = $H({"sw": sw.lat() + "," + sw.lng(), "ne": ne.lat() + "," + ne.lng()}).toQueryString();
+			//log("Diagonal distance at zoom level ", this.map.getZoom(), ": ", google.maps.geometry.spherical.computeDistanceBetween(sw, ne));
+			new Ajax.Request('/application/getallfromlocation?' + coords, {
+				method: 'get',
+				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
+			});
+		}
+	},
+	initRacks: function() {
+		this.racks = $A();
+		new Ajax.Request('/application/getmany', {
+			method:'get',
+			onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
+		});
+	},
+	addOrUpdateRacksFromAjax: function(transport) {
+		var json = transport.responseText.evalJSON();
+		$A(json).each(function(obj) {
+			var rack = this.racks.filter(function(rack) {
+				return rack.id === obj.id;
+			}).first();
+			if (rack) {
+				rack.updateDataFromAjax(obj);
+			}
+			else {
+				rack = new Rack(obj, {
+					provider: this.rackProvider
+				});
+				rack.on("infoWindowOpen", this.onInfoWindowOpen.bind(this));
+				this.racks.push(rack);
+			}
+		}.bind(this));
+	},
+	onInfoWindowOpen: function() {
+		this.racks.invoke("closeInfoWindow");
 	},
 	updatePositionUsingGeolocation: function() {
 		// Try W3C Geolocation (Preferred)
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
-				app.setCenter(position.coords.latitude, position.coords.longitude, position.coords.accuracy);
-			}, function() {
-				app.setCenter();
-			});
+				this.setCenter(position.coords.latitude, position.coords.longitude, position.coords.accuracy);
+			}.bind(this), function() {
+				this.setCenter();
+			}.bind(this));
 		// Browser doesn't support Geolocation
 		} else {
-			app.setCenter();
+			this.setCenter();
 		}
-	},
+	},	
 	setMode: function(mode) {
 		if (/BOTH|LOCKS|BIKES/.test(mode)) {
-			app.mode = mode;
-			app.racks.invoke("update");
+			this.mode = mode;
+			this.racks.invoke("update");
 		}
 	},
 	setCenter: function(latitude, longitude, accuracy) {
-		var gLocation = (latitude && longitude) ? new google.maps.LatLng(latitude, longitude) : app.config.defaultCenter;
-		app.map.setCenter(gLocation);
-	}
-	
-});
-
-var app = new BikeSyke();
-
-
-app.init = function () {
-	var myOptions = {
-		center: app.config.defaultCenter,
-		zoom: 13,
-		scaleControl:true,
-		navigationControl:true,
-		mapTypeControl:false,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-	app.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-	app.updatePositionUsingGeolocation();
-	
-	var rackProvider = new RackProvider(app.map, function() {return app.mode;});
-	new Ajax.Request('/application/getmany', {
-		method:'get',
-		onSuccess: function(transport){
-			var json = transport.responseText.evalJSON();
-			$A(json).each(function(rack) {
-				app.racks.push(new app.rack(rack, {
-					provider: rackProvider,
-					useStreetview:  app.useStreetview
-				}));
-			});
+		var gLocation = (latitude && longitude) ? new google.maps.LatLng(latitude, longitude) : this.config.defaultCenter;
+		if (google.maps.geometry.spherical.computeDistanceBetween(gLocation, this.config.defaultCenter) < this.config.maxDistance) {
+			// var diff = accuracy / (2*Math.PI*6378137) * 360;
+			this.map.setCenter(gLocation);
+			if (accuracy) {
+				var zoom = 12;
+				if (accuracy < 1000) {
+					zoom = 13;
+				}
+				if (accuracy < 500) {
+					zoom = 14;
+				}
+				this.map.setZoom(zoom);
+			}
+			if (navigator.geolocation && accuracy) {
+				if (this.currentLocationMarker) {
+					this.currentLocationMarker.setPosition(gLocation);
+				}
+				else {
+					this.currentLocationMarker = new google.maps.Marker({
+						map: this.map,
+						visible: true,
+						icon: "http://chart.apis.google.com/chart?cht=it&chs=12x12&chco=0e5eff,000000ff,ffffff01&chl=&chx=000000,0&chf=bg,s,00000000&ext=.png",
+						position: gLocation
+					});
+				}
+			}
 		}
-	});
-};
-
-
-document.observe("dom:loaded", function() {
-	app.init();
+	}
 });
 
-app.mode = "BOTH"; // BIKES, LOCKS
-
-RackProvider = Class.create({
+var RackProvider = Class.create({
 	initialize: function(map, getMode) {
 		this.map = map;
 		this.mode = getMode;
@@ -127,9 +234,7 @@ RackProvider = Class.create({
 	
 });
 
-app.racks = $A();
-
-app.rack = Class.create({
+var Rack = Class.create({
 	initialize: function(obj, options) {
 		// properties
 		this.id          = null;
@@ -148,16 +253,19 @@ app.rack = Class.create({
 
 		// resources
 		this.provider = options.provider;
+	
+		// events hash
+		this.events = {};
 		
-		this.useStreetview = options.useStreetview;
-
 		if (!this.initMarker()) {
 			this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
 		}
+		
+		// disable street view
+		this.useStreetview = false;
 	},
 	initMarker: function() {
 		if (!this.marker && this.latitude && this.longitude) {
-			log("adding marker");
 			this.marker = this.provider.getMarker({
 				position: new google.maps.LatLng(this.latitude, this.longitude),
 				icon: this.provider.getMarkerIcon(this.toCommonObject()),
@@ -180,7 +288,6 @@ app.rack = Class.create({
 		}
 	},
 	updateDataFromAjax: function(jsonData) {
-		log("ajax fetched");
 		this.updateProperty("bikes",       jsonData.ready_bikes);
 		this.updateProperty("locks",       jsonData.empty_locks);
 		this.updateProperty("description", jsonData.description);
@@ -208,7 +315,6 @@ app.rack = Class.create({
 	markerClickHandler: function() {
 		this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
 		if (!this.infoWindow) {
-			console.log("new infowindow");
 			var element = new Element("div");
 			element.insert(this.toHTML());
 			this.infoWindowContent = element.firstDescendant();
@@ -221,11 +327,16 @@ app.rack = Class.create({
 				this.infoWindowReadyHandler.bindAsEventListener(this)
 			);
 		}
+		this.trigger("infoWindowOpen");
 		this.infoWindow.open(app.map, this.marker);
+	},
+	closeInfoWindow: function() {
+		if (this.infoWindow) {
+			this.infoWindow.close();
+		}
 	},
 	infoWindowReadyHandler: function(e) {
 		if (this.useStreetview) {
-			log("new street view");
 			var currentLocation = new google.maps.LatLng(this.latitude, this.longitude),
 				panoramaElement = this.infoWindowContent.down(".panorama"),
 		    	panoramaOptions = {
@@ -271,5 +382,18 @@ app.rack = Class.create({
 				'</div>',
 			'</div>'
 		].join('');
+	},
+	on: function(event, callback) {
+		if (!this.events[event]) {
+			this.events[event] = $A();
+		}
+		this.events[event].push(callback);
+	},
+	trigger: function(event) {
+		if (this.events[event]) {
+			this.events[event].each(function(callback) {
+				callback();
+			});
+		}
 	}
 });

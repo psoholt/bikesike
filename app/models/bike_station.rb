@@ -1,11 +1,11 @@
 require 'json'
-require 'xml'
+#require 'xml'
 require 'auto_json.rb'
-require 'auto_xml.rb'
+#require 'auto_xml.rb'
 
 class BikeStation
   include AutoJson
-  include AutoXml
+  #include AutoXml
   attr_accessor :id, :online, :ready_bikes, :empty_locks, :longitude, :latitude, :description
   attr_reader :time_created
 
