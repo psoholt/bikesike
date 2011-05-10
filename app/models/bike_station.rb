@@ -1,6 +1,6 @@
 require 'json'
 #require 'xml'
-require './auto_json.rb'
+require_relative '../helpers/auto_json.rb'
 #require 'auto_xml.rb'
 
 class BikeStation
