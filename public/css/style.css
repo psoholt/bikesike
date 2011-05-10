@@ -16,9 +16,22 @@ body { height: 100%; margin: 0px; padding: 0px }
 #map_canvas { height: 100% }
 
 .rack {
-	width: 240px;
-	height: 192px;
+	max-width: 240px;
+	max-height: 192px;
 	position: relative;
+}
+.load {
+	display: none;
+}
+.rack.loading .load {
+	display: block;
+	background: rgba(255,255,255,.5) url(/images/loading.gif) no-repeat 50% 50%;
+	position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
 }
 .rack p {
 	position: absolute;
@@ -30,32 +43,35 @@ body { height: 100%; margin: 0px; padding: 0px }
 	margin: 0;
 	right: 0;
 	line-height: 1.1;
-}
-.rack img,
-.rack .panorama {
-	width: 240px;
-	height: 160px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .rack img {
 	display: block;
+	width: 100%;
+	height: 100%;
 	margin: 0;
 	padding: 0;
 }
 .rack .res {
-	width: 100%;
+	background: rgba(255,255,255,.5);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	height: 32px;
 	line-height: 32px;
-	background: #fff;
-	text-align: left;
 	z-index: 1;	
+	text-align: center;
+	list-style: none;
 }
-.rack .res strong {
-	padding-left: 10px;
+.rack .res li {
+	float: left;
+	width: 50%;
 }
 .rack .res .icon {
-	float: right;
-	padding-right: 18px;
-	margin-left: 16px;
+	margin: 0 5px;
 }
 .icon {
 	background: url(/images/icons.png) no-repeat 999em 999em;
@@ -65,16 +81,18 @@ body { height: 100%; margin: 0px; padding: 0px }
 	position: relative;
 }
 .icon-lock {
+	float: right;
 	background-position: 0 50%;
-	width: 25px;
+	width: 15px;
 }
 .icon-bike {
+	float: left;
 	background-position: -300px 50%;
-	width: 48px;
+	width: 25px;
 }
 .data {
 	position: absolute;
-	top: 2px;
+	top: 7px;
 	right: 0;
 	padding: 2px 10px;
 	line-height: 100%;
@@ -82,11 +100,20 @@ body { height: 100%; margin: 0px; padding: 0px }
 	text-align: center;
 	background-color: #727e94;
 	color: #fff;
-	text-shadow: 0 0 3px #000;
+	text-shadow: 0 0 2px #000;
+	min-width: 1.5em;
+	font-weight: bold;
 	
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
+}
+.data-bikes {
+	right: auto;
+	left: 30px;
+}
+.data-locks {
+	right: 20px;
 }
 
 .controls {
