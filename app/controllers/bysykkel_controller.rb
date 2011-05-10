@@ -31,8 +31,8 @@ class BysykkelController < ActionController::Base
     #@allstations = Execute.get_all_stations()
 
     @racks = []
+    #(1..108).each do |i|
     (1..10).each do |i|
-    #(1..10).each do |i|
       @racks << BikeStation.new(i)
     end
     
