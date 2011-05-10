@@ -30,6 +30,11 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  activerecord
   activerecord-nulldb-adapter
+  activeresource
+  activesupport
   json
+  rack
   rails (= 2.3.8)
+  rake
