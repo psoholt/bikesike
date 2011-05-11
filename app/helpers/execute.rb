@@ -88,7 +88,8 @@ class Execute
   def Execute.initialize_bikestations_from_xml(doc)
     array = []
     doc.elements.each('string/station') { |tag|
-      array << tag.text.to_i
+      id = tag.text.to_i
+      array << id unless id > 450
     }
     array
   end

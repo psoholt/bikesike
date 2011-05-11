@@ -21,4 +21,7 @@ class CacheHelper
   def get_all
     @bikehash
   end
+
+#  def CacheHelper.get_cache
+
 end

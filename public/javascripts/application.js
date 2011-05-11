@@ -138,7 +138,7 @@ var BikeSike = Class.create({
 	},
 	initRacks: function() {
 		this.racks = $A();
-		new Ajax.Request('/bysykkel/getmany', {
+		new Ajax.Request('/bysykkel/all', {
 			method:'get',
 			onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 		});
@@ -221,7 +221,7 @@ var RackProvider = Class.create({
 		this.mode = getMode;
 	},
 	getRackData: function(id, callback) {
-		new Ajax.Request('/bysykkel/getjson/' + id + '.json', {
+		new Ajax.Request('/bysykkel/station/' + id + '.json', {
 			method:'get',
 			onSuccess: function(transport){
 				var json = transport.responseText.evalJSON();

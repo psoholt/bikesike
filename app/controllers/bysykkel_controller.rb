@@ -3,9 +3,8 @@ require_relative "../helpers/execute.rb"
 class BysykkelController < ActionController::Base
 #  helper :all # include all helpers, all the time
 #  protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  @bike_cache = CacheHelper.new
 
-  def getjson
+  def station
     puts @bike_cache
     @bike_station = Execute.get_bike_station(params[:id])
 
@@ -33,7 +32,7 @@ class BysykkelController < ActionController::Base
 #    end
 #  end
 
-  def getmany
+  def all
     # med id, long, lat (+ bikes and locks and online)
     #@allstations = Execute.get_all_stations()
     @allstations = Execute.get_all_stations
