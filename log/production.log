@@ -8,3 +8,13 @@ Completed in 81ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/getjson/1
 Processing BysykkelController#getjson to json (for 127.0.0.1 at 2011-05-11 11:05:40) [GET]
   Parameters: {"id"=>"15"}
 Completed in 48ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/getjson/15.json]
+
+
+Processing BysykkelController#getjson to json (for 127.0.0.1 at 2011-05-11 11:16:39) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 51ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/getjson/15.json]
+
+
+Processing BysykkelController#getjson to json (for 127.0.0.1 at 2011-05-11 11:16:40) [GET]
+  Parameters: {"id"=>"15"}
+Completed in 48ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/getjson/15.json]
