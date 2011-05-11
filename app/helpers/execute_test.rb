@@ -70,6 +70,14 @@ class ExecuteTest < Test::Unit::TestCase
     puts bike_from_hash_second
   end
 
+  def test_caching_count
+    bike = Execute.get_bike_station_yield(3) {|id| Execute.open_xml_from_file(id, File.dirname($0)+"/") }
+    bike2 = Execute.get_bike_station_yield(2) {|id| Execute.open_xml_from_file(id, File.dirname($0)+"/") }
+    cache_helper = CacheHelper.new
+    #cache_helper.put bike
+    puts cache_helper.get_all.count
+  end
+
   def test_getbikestation_fromadshel_isnotempty
     bike_stations = Execute.get_all_station_numbers { Execute.web_open_all_xml() }
     puts bike_stations
@@ -78,10 +86,6 @@ class ExecuteTest < Test::Unit::TestCase
   def test_get_all_stations_isnotempty
     bike_stations = Execute.get_all_stations
     puts bike_stations
-  end
-
-  def test_racks
-    
   end
   
 end

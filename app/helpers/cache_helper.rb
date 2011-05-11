@@ -1,10 +1,15 @@
+RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
+
 class CacheHelper
   @@cache_time_seconds = 30
-  @bikehash = Hash.new
+  @bikehash
+
+  def initialize hash_init = Hash.new
+    @bikehash = hash_init
+  end
 
   def put(an_object)
     if an_object.instance_variable_defined?(:@id)
-      @bikehash = Hash.new if @bikehash.nil?
 
       @bikehash[an_object.id] = an_object
       puts @bikehash
@@ -21,7 +26,5 @@ class CacheHelper
   def get_all
     @bikehash
   end
-
-#  def CacheHelper.get_cache
 
 end
