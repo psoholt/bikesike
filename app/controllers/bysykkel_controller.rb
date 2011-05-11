@@ -5,7 +5,6 @@ class BysykkelController < ActionController::Base
 #  protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   def station
-    puts @bike_cache
     @bike_station = Execute.get_bike_station(params[:id])
 
     respond_to do |format|
