@@ -6,7 +6,6 @@ class BysykkelController < ActionController::Base
   @bike_cache = CacheHelper.new
 
   def getjson
-    #@bike_station = Execute.get_bike_station_yield(params[:id]) {|id| Execute.web_open_xml(params[:id]) }
     puts @bike_cache
     @bike_station = Execute.get_bike_station(params[:id])
 
@@ -14,6 +13,12 @@ class BysykkelController < ActionController::Base
         format.xml  { render :xml => @bike_station }
         format.json { render :json => @bike_station }
     end
+  end
+
+  def testcache
+    cache_helper = Rails.cache.read("cache_helper")
+    puts cache_helper
+    Rails.cache.write("cache_helper", Execute.get_bike_station(2)) if cache_helper.nil?
   end
 
 # def getallfromlocation (topLeft, bottomRight)

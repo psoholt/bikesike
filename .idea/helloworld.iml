@@ -51,13 +51,6 @@
         <dependency name="rails" version="2.3.8" bound="EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="Gemfile" />
-      <source from="config/environment.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rails" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source from="config/boot.rb" />
     </requirement>
     <requirement>
       <requirement>
@@ -96,6 +89,11 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.2.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.2.1)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.0.13, C:/Ruby191/lib/ruby/gems/1.9.1/gems/bundler-1.0.13)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.0, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.1.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.2.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.2.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activeresource-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activemodel (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activemodel-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-3.0.5)" level="application" />
   </component>
 </module>
 
