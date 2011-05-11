@@ -40,10 +40,10 @@ test:
 production:
   adapter: nulldb
   encoding: unicode
-#  reconnect: false
-  database: qjtuktxcno
-#  pool: 5
-  port: 5432
-  username: asdf
-  password: asdf
+  reconnect: false
+  database: helloworld
+  pool: 5
+#  port: 5432
+  username:
+  password: 
   host: localhost

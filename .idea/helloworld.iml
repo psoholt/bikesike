@@ -14,14 +14,12 @@
       <requirement>
         <dependency name="activerecord" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
-      <source manual="true" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
         <dependency name="activerecord-nulldb-adapter" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
-      <source manual="true" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
@@ -66,12 +64,6 @@
         <dependency name="rake" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="Gemfile" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="test-unit" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
     </requirement>
   </component>
   <component name="NewModuleRootManager">
