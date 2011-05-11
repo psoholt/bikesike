@@ -23,7 +23,7 @@ class Execute
     tekst
   end
 
-  def Execute.get_all_xml()
+  def Execute.get_all_xml(data)
     tekst = ""
     data = Execute.web_open_all_xml() if data.nil?
     data.each_line { |f| tekst+= f }
@@ -39,12 +39,23 @@ class Execute
     Document.new(tekst)
   end 
 
-  def Execute.get_bike_station(id)
+  def Execute.get_bike_station_yield(id)
     Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(yield(id)) , id )
   end
 
-  def Execute.get_all_stations()
-    Execute.initialize_bikestations_from_xml( Execute.get_all_xml() )
+  def Execute.get_bike_station(id)
+    Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(Execute.web_open_xml(id)) , id )
+  end
+
+  def Execute.get_all_stations
+    station_numbers = Execute.get_all_station_numbers
+    bike_stations = []
+    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x) }
+    bike_stations
+  end
+
+  def Execute.get_all_station_numbers()
+    Execute.initialize_bikestations_from_xml( Execute.get_all_xml(Execute.web_open_all_xml))
   end
 
 
@@ -74,17 +85,12 @@ class Execute
     bike
   end
 
-    def Execute.initialize_bikestations_from_xml(doc)
-
-    doc.elements.each('station') { |tag|
-      puts tag.text.gsub("&lt;", "<").gsub("&gt;", ">")
+  def Execute.initialize_bikestations_from_xml(doc)
+    array = []
+    doc.elements.each('string/station') { |tag|
+      array << tag.text.to_i
     }
-
-    "bike"
-  end
-
-  def Execute.racks
-    Bysykkel::Rack.all
+    array
   end
 
 end

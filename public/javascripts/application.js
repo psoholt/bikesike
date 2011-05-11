@@ -38,6 +38,7 @@ var BikeSike = Class.create({
 			scaleControl: true,
 			navigationControl: true,
 			mapTypeControl: false,
+			streetViewControl: false,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		this.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -61,7 +62,7 @@ var BikeSike = Class.create({
 				event.stop();
 				this.updatePositionUsingGeolocation();
 			}.bindAsEventListener(this));
-			this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locate);
+			this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(locate);
 		}
 	},
 	addModeControls: function() {
@@ -98,21 +99,46 @@ var BikeSike = Class.create({
 		}.bindAsEventListener(this));
 	},
 	mapBoundsChanged: function() {
+		// only keep markers on map visible
+		this.racks.invoke("update");
+		
+		// in modes when displaying numbered markers make sure to keep them updated when on map
 		if (this.mode !== "BOTH") {
 			var bounds = this.map.getBounds(),
 				ne = bounds.getNorthEast(),
 				sw = bounds.getSouthWest(),
 				coords = $H({"sw": sw.lat() + "," + sw.lng(), "ne": ne.lat() + "," + ne.lng()}).toQueryString();
-			//log("Diagonal distance at zoom level ", this.map.getZoom(), ": ", google.maps.geometry.spherical.computeDistanceBetween(sw, ne));
-			new Ajax.Request('/application/getallfromlocation?' + coords, {
+			new Ajax.Request('/bysykkel/getallfromlocation?' + coords, {
 				method: 'get',
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
 		}
+		return;
+		// logging stuff
+		var visible = 0;
+		this.racks.each(function(rack) {
+			if (rack.marker && rack.marker.getVisible())
+				visible++;
+		});
+		log(visible, " visible racks");
+		
+		this.racks.each(function(rack) {
+			if (rack.infoWindowOpen) {
+				setTimeout(function() {
+					var iwHeight = $(rack.infoWindow.getContent().parentNode).getHeight(),
+						iwWidth = $(rack.infoWindow.getContent().parentNode).getWidth(),
+						bodyHeight = $(document.body).getHeight(),
+						lHeight = $("locate").getHeight(),
+						diff = bodyHeight - iwHeight -lHeight;
+					alert("iwW: " + iwWidth + ", iwH: " + iwHeight + ", body: " + bodyHeight + ", locate: " + lHeight + ", diff: " + diff);
+				}, 1000);
+			}
+		});
+		
 	},
 	initRacks: function() {
 		this.racks = $A();
-		new Ajax.Request('/application/getmany', {
+		new Ajax.Request('/bysykkel/getmany', {
 			method:'get',
 			onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 		});
@@ -195,7 +221,7 @@ var RackProvider = Class.create({
 		this.mode = getMode;
 	},
 	getRackData: function(id, callback) {
-		new Ajax.Request('/application/getjson/' + id + '.json', {
+		new Ajax.Request('/bysykkel/getjson/' + id + '.json', {
 			method:'get',
 			onSuccess: function(transport){
 				var json = transport.responseText.evalJSON();
@@ -213,7 +239,7 @@ var RackProvider = Class.create({
 		}, options || {});
 		return new google.maps.Marker(_options);
 	},
-	getMarkerIcon: function(providerData) {
+	getMarkerIcon: function(providerData, rack) {
 		// http://gmaps-utility-library.googlecode.com/svn/trunk/mapiconmaker/1.1/examples/markericonoptions-wizard.html
 		// https://chart.googleapis.com/chart?chst=d_map_pin_icon_withshadow&chld=bicycle|cccccc|ffffff
 		// http://chart.apis.google.com/chart?cht=it&chs=32x32&chco=cccccc,000000ff,ffffff01&chl=a&chx=000000,0&chf=bg,s,00000000&ext=.png
@@ -227,11 +253,22 @@ var RackProvider = Class.create({
 		return url;
 	},
 	getMarkerVisibility: function(providerData) {
-		return app.mode === "BOTH" || 
+		return (app.mode === "BOTH" || 
 			(app.mode === "BIKES" && providerData.bikes > 0) ||
-			(app.mode === "LOCKS" && providerData.locks > 0);
+			(app.mode === "LOCKS" && providerData.locks > 0)) &&
+			this.isWithinMapBounds(providerData);
+	},
+	isWithinMapBounds: function(providerData) {
+		var bounds = this.map.getBounds(),
+			ne  = bounds.getNorthEast(),
+			sw  = bounds.getSouthWest(),
+			lng = providerData.longitude,
+			lat = providerData.latitude;
+		return sw.lat() <= lat      &&
+			        lat <= ne.lat() &&
+			   sw.lng() <= lng      &&
+			        lng <= ne.lng();
 	}
-	
 });
 
 var Rack = Class.create({
@@ -258,11 +295,8 @@ var Rack = Class.create({
 		this.events = {};
 		
 		if (!this.initMarker()) {
-			this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+			this.requestData();
 		}
-		
-		// disable street view
-		this.useStreetview = false;
 	},
 	initMarker: function() {
 		if (!this.marker && this.latitude && this.longitude) {
@@ -283,11 +317,22 @@ var Rack = Class.create({
 	},
 	updateMarker: function() {
 		if (this.marker) {
-			this.marker.setIcon(this.provider.getMarkerIcon(this.toCommonObject()));
-			this.marker.setVisible(this.provider.getMarkerVisibility(this.toCommonObject()));
+			var commonObject = this.toCommonObject();
+			this.marker.setIcon(this.provider.getMarkerIcon(commonObject));
+			var visibility = this.provider.getMarkerVisibility(commonObject) || !!this.infoWindowOpen;
+			this.marker.setVisible(visibility);
+		}
+	},
+	requestData: function() {
+		this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+		if (this.infoWindow) {
+			$(this.infoWindow.getContent()).addClassName("loading");
 		}
 	},
 	updateDataFromAjax: function(jsonData) {
+		if (this.infoWindow) {
+			$(this.infoWindow.getContent()).removeClassName("loading");
+		}
 		this.updateProperty("bikes",       jsonData.ready_bikes);
 		this.updateProperty("locks",       jsonData.empty_locks);
 		this.updateProperty("description", jsonData.description);
@@ -296,7 +341,6 @@ var Rack = Class.create({
 	},
 	updateProperty: function(property, value) {
 		if (this[property] !== value) {
-			// log("updating rack ", this.id, " with: ", property, " = ", value);
 			this[property] = value;
 			if (this.infoWindowContent) {
 				var dataElement = this.infoWindowContent.down(".data-"+property);
@@ -307,13 +351,11 @@ var Rack = Class.create({
 			if (/longitude|latitude/.test(property)) {
 				this.initMarker();
 			}
-			if (/locks|bikes/.test(property)) {
-				this.updateMarker();
-			}
+			this.updateMarker();
 		}
 	},
 	markerClickHandler: function() {
-		this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+		this.requestData();
 		if (!this.infoWindow) {
 			var element = new Element("div");
 			element.insert(this.toHTML());
@@ -321,65 +363,49 @@ var Rack = Class.create({
 			this.infoWindow = new google.maps.InfoWindow({
 				content: this.infoWindowContent
 			});
-			this.infoWindowReadyListener = google.maps.event.addListener(
-				this.infoWindow, 
-				'domready', 
-				this.infoWindowReadyHandler.bindAsEventListener(this)
-			);
 		}
 		this.trigger("infoWindowOpen");
 		this.infoWindow.open(app.map, this.marker);
+		this.infoWindowOpen = true;
 	},
 	closeInfoWindow: function() {
 		if (this.infoWindow) {
 			this.infoWindow.close();
+			this.infoWindowOpen = false;
 		}
-	},
-	infoWindowReadyHandler: function(e) {
-		if (this.useStreetview) {
-			var currentLocation = new google.maps.LatLng(this.latitude, this.longitude),
-				panoramaElement = this.infoWindowContent.down(".panorama"),
-		    	panoramaOptions = {
-					position: currentLocation,
-					addressControl: false,
-					panControl: false,
-					zoomControl: false,
-					pov: {
-						heading: 165,
-						pitch: 0,
-						zoom: 1
-					}
-		    	};
-
-		    this.streetView = new google.maps.StreetViewPanorama(panoramaElement, panoramaOptions);
-	    	this.streetView.setVisible(true);
-		}
-
-		// remove ready listener
-		google.maps.event.removeListener(this.infoWindowReadyListener);
-		
 	},
 	toCommonObject: function() {
 		return {
-			bikes: this.bikes,
-			locks: this.locks
+			bikes:     this.bikes,
+			locks:     this.locks,
+			longitude: this.longitude,
+			latitude:  this.latitude
 		};
 	},
 	toString: function() {
 		return "RACK id: " + this.id + ", lat: " + this.latitude + ", long: " + this.longitude;
 	},
 	toHTML: function() {
+		var slots = (this.bikes + this.locks) / 100;
 		return [
 			'<div class="rack">',
 				//'<h2>' + this.name + '</h2>',
 				'<img src="http://cbk0.google.com/cbk?output=thumbnail&w=240&h=160&ll=' + this.latitude + ',' + this.longitude + '" />',
 				this.useStreetview ? '<div class="panorama"></div>' : '',
 				'<p class="title data-description">' + this.description + '</p>',
-				'<div class="res">',
-					'<strong>Attributes: </strong>',
-					'<span class="icon icon-bike"><span class="data data-bikes">' + this.bikes + '</span></span>',
-					'<span class="icon icon-lock"><span class="data data-locks">' + this.locks + '</span></span>',
-				'</div>',
+				'<ul class="res">',
+					'<li>',
+						'<span class="icon icon-bike">',
+							'<span class="data data-bikes">' + this.bikes + '</span>',
+						'</span>',
+					'</li>',
+					'<li>',
+						'<span class="icon icon-lock">',
+							'<span class="data data-locks">' + this.locks + '</span>',
+						'</span>',
+					'</li>',
+				'</ul>',
+				'<div class="load"></div>',
 			'</div>'
 		].join('');
 	},
