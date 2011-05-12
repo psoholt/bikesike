@@ -163,3 +163,153 @@ localhost:11211 failed (count: 3)
 DalliError: No server available
 DalliError: No server available
 Completed in 546ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/2.json]
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-12 14:59:58) [GET]
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+localhost:11211 failed (count: 2)
+DalliError: No server available
+Completed in 9595ms (View: 17, DB: 0) | 200 OK [http://localhost/bysykkel/all]
+Session::DalliStore#get: Response error 32: Authentication required
+mc2.ec2.northscale.net:11211 failed (count: 0)
+mc2.ec2.northscale.net:11211 failed (count: 1)
+mc2.ec2.northscale.net:11211 is down
+Session::DalliStore#set: No server available
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-12 15:00:16) [GET]
+localhost:11211 failed (count: 3)
+DalliError: No server available
+localhost:11211 failed (count: 4)
+DalliError: No server available
+Completed in 8163ms (View: 60, DB: 0) | 200 OK [http://localhost/bysykkel/all]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:29:20) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+DalliError: No server available
+Completed in 1090ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-12 15:29:27) [GET]
+localhost:11211 failed (count: 2)
+DalliError: No server available
+localhost:11211 failed (count: 3)
+DalliError: No server available
+Completed in 4201ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/all]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:29:58) [GET]
+  Parameters: {"id"=>"2"}
+localhost:11211 failed (count: 4)
+DalliError: No server available
+DalliError: No server available
+Completed in 547ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/2.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:30:31) [GET]
+  Parameters: {"id"=>"3"}
+localhost:11211 failed (count: 5)
+DalliError: No server available
+DalliError: No server available
+Completed in 741ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/3.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:32:37) [GET]
+  Parameters: {"id"=>"3"}
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+DalliError: No server available
+Completed in 1082ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/3.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:33:02) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 2)
+DalliError: No server available
+DalliError: No server available
+Completed in 690ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:35:19) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+DalliError: No server available
+Completed in 1149ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:35:25) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 2)
+DalliError: No server available
+DalliError: No server available
+Completed in 545ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:35:28) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 3)
+DalliError: No server available
+DalliError: No server available
+Completed in 597ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:35:38) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 4)
+DalliError: No server available
+DalliError: No server available
+Completed in 549ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:36:05) [GET]
+  Parameters: {"id"=>"3"}
+localhost:11211 failed (count: 5)
+DalliError: No server available
+DalliError: No server available
+Completed in 798ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/3.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:44:18) [GET]
+  Parameters: {"id"=>"3"}
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+DalliError: No server available
+Completed in 1068ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/station/3.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:54:03) [GET]
+  Parameters: {"id"=>"3"}
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+DalliError: No server available
+Completed in 1103ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/3.json]
+Session::DalliStore#get: Response error 32: Authentication required
+mc2.ec2.northscale.net:11211 failed (count: 0)
+mc2.ec2.northscale.net:11211 failed (count: 1)
+mc2.ec2.northscale.net:11211 is down
+Session::DalliStore#set: No server available
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 15:54:09) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 2)
+DalliError: No server available
+DalliError: No server available
+Completed in 544ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]

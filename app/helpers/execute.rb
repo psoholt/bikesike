@@ -55,13 +55,23 @@ class Execute
   end
 
   def Execute.get_all_stations(cache_helper = nil)
+    bike_stations = nil
+    unless(cache_helper.nil?)
+      bike_stations = cache_helper.get_all.values
+      return bike_stations if bike_stations.count > 100
+    end
+
     station_numbers = Execute.get_all_station_numbers cache_helper
-    bike_stations = []
+    return station_numbers unless station_numbers.empty?
     station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper) }
     bike_stations
   end
 
   def Execute.get_all_station_numbers(cache_helper = nil)
+    unless(cache_helper.nil?)
+      station_numbers = cache_helper.get_bike_ids
+      return station_numbers if station_numbers.count > 100
+    end
     Execute.initialize_bikestations_from_xml( Execute.get_all_xml(Execute.web_open_all_xml))
   end
 
