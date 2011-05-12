@@ -69,3 +69,8 @@ Completed in 42ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4
 Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 13:53:20) [GET]
   Parameters: {"id"=>"4"}
 Completed in 42ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 14:22:20) [GET]
+  Parameters: {"id"=>"4"}
+Completed in 55ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]

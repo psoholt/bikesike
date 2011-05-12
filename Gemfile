@@ -1,5 +1,4 @@
 source :gemcutter
-#gem 'bysykkel'
 gem 'json'
 gem 'rails', '2.3.8'
 gem 'activerecord'
@@ -8,3 +7,4 @@ gem 'activeresource'
 gem 'activesupport'
 gem 'rack'
 gem 'rake'
+gem 'dalli'

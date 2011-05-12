@@ -36,6 +36,12 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="dalli" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="Gemfile" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="json" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="Gemfile" />
@@ -68,32 +74,28 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] json (v1.5.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/json-1.5.1-x86-mingw32)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] rails (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rails-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] actionmailer (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/actionmailer-2.3.8)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rake (v0.8.7, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rake-0.8.7)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] actionpack (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/actionpack-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activeresource-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-2.3.8)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-2.3.8)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord-nulldb-adapter (v0.2.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-nulldb-adapter-0.2.1)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] test-unit (v2.3.0, C:/Ruby191/lib/ruby/gems/1.9.1/gems/test-unit-2.3.0)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v3.0.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-3.0.3)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] tzinfo (v0.3.24, C:/Ruby191/lib/ruby/gems/1.9.1/gems/tzinfo-0.3.24)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] builder (v2.1.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/builder-2.1.2)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v3.0.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activeresource-3.0.3)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] i18n (v0.5.0, C:/Ruby191/lib/ruby/gems/1.9.1/gems/i18n-0.5.0)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] arel (v2.0.7, C:/Ruby191/lib/ruby/gems/1.9.1/gems/arel-2.0.7)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v3.0.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activemodel (v3.0.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activemodel-3.0.3)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v3.0.7, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-3.0.7)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.2.1, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.2.1)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.0.13, C:/Ruby191/lib/ruby/gems/1.9.1/gems/bundler-1.0.13)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.0, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.1.0)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.2.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.2.2)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activeresource-3.0.5)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-3.0.5)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] activemodel (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activemodel-3.0.5)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] dalli (v1.0.3, C:/Ruby191/lib/ruby/gems/1.9.1/gems/dalli-1.0.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.0.13, C:/Ruby191/lib/ruby/gems/1.9.1/gems/bundler-1.0.13)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rails (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rails-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] builder (v2.1.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/builder-2.1.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.1.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] i18n (v0.5.0, C:/Ruby191/lib/ruby/gems/1.9.1/gems/i18n-0.5.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] actionmailer (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/actionmailer-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] actionpack (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/actionpack-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activeresource-2.3.8)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v2.3.8, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-2.3.8)" level="application" />
   </component>
 </module>
 
