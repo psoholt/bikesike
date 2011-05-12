@@ -6,15 +6,14 @@ class BysykkelController < ActionController::Base
 #  protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   def station
-    #cache_helper = get_cache_helper
-    cache_helper = nil
+    cache_helper = get_cache_helper
     @bike_station = Execute.get_bike_station(params[:id], cache_helper)
     
     respond_to do |format|
         format.xml  { render :xml => @bike_station }
         format.json { render :json => @bike_station }
     end
-    #put_cache_helper cache_helper
+    put_cache_helper cache_helper
   end
 
   def testcache
@@ -38,8 +37,7 @@ class BysykkelController < ActionController::Base
 
   def all
     # med id, long, lat (+ bikes and locks and online)
-    #cache_helper = get_cache_helper
-    cache_helper = nil
+    cache_helper = get_cache_helper
     @allstations = Execute.get_all_stations cache_helper
 
     respond_to do |format|

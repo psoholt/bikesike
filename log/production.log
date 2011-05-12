@@ -74,3 +74,21 @@ Completed in 42ms (View: 0, DB: 0) | 200 OK [http://localhost/bysykkel/station/4
 Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 14:22:20) [GET]
   Parameters: {"id"=>"4"}
 Completed in 55ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 14:27:06) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+DalliError: No server available
+Completed in 1072ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 14:27:09) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 2)
+DalliError: No server available
+DalliError: No server available
+Completed in 554ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
