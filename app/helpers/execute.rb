@@ -55,9 +55,12 @@ class Execute
   end
 
   def Execute.get_all_stations(cache_helper = nil)
-    bike_stations = nil
+    bike_stations = []
     unless(cache_helper.nil?)
-      bike_stations = cache_helper.get_all.values
+      bikehash = cache_helper.get_all
+      puts "bikehash" + bikehash.to_s
+      bikehash.each { |x| bike_stations << x }
+      puts "values"+bike_stations.to_s
       return bike_stations if bike_stations.count > 100
     end
 

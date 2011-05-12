@@ -313,3 +313,27 @@ localhost:11211 failed (count: 2)
 DalliError: No server available
 DalliError: No server available
 Completed in 544ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#station to json (for 127.0.0.1 at 2011-05-12 16:05:20) [GET]
+  Parameters: {"id"=>"4"}
+localhost:11211 failed (count: 3)
+DalliError: No server available
+DalliError: No server available
+Completed in 892ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/station/4.json]
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-12 16:07:56) [GET]
+localhost:11211 failed (count: 4)
+DalliError: No server available
+DalliError: No server available
+Completed in 933ms (View: 2, DB: 0) | 200 OK [http://localhost/bysykkel/all]
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-12 16:10:05) [GET]
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+DalliError: No server available
+Completed in 1081ms (View: 1, DB: 0) | 200 OK [http://localhost/bysykkel/all]

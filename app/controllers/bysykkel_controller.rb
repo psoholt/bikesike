@@ -35,6 +35,10 @@ class BysykkelController < ActionController::Base
 #    end
 #  end
 
+  def reset_cache
+    Rails.cache.write("cache_helper", Hash.new)
+  end
+
   def all
     # med id, long, lat (+ bikes and locks and online)
     cache_helper = get_cache_helper
@@ -43,6 +47,7 @@ class BysykkelController < ActionController::Base
     respond_to do |format|
         format.json { render :json => @allstations }
     end
+    puts @allstations
     put_cache_helper cache_helper
   end
 
