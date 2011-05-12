@@ -6,9 +6,14 @@
 # no regular words or you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
   :key         => '_helloworld_session',
-  :secret      => '6de937331bf913a91bc9cf5b674551d782328193473644b851908af58c1255dba33884b6f480ef4fa158950b0dad2ffa28e51c6fb7b2f3f87cc69b84debb222f'
+  :secret      => '6de937331bf913a91bc9cf5b674551d782328193473644b851908af58c1255dba33884b6f480ef4fa158950b0dad2ffa28e51c6fb7b2f3f87cc69b84debb222f',
+  :namespace   => 'sessions',
+  :expire_after => 180.minutes.to_i,
+  :memcache_server => ['mc2.ec2.northscale.net'],
 }
 
+require 'action_controller/session/dalli_store'
+ActionController::Base.session_store = :dalli_store
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rake db:sessions:create")

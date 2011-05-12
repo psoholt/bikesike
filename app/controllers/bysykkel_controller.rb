@@ -56,6 +56,7 @@ class BysykkelController < ActionController::Base
     if rails_cache_hash.nil?
       rails_cache_hash = Hash.new
     end
+    puts rails_cache_hash.to_s
     CacheHelper.new rails_cache_hash
   end
 
