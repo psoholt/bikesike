@@ -23,7 +23,7 @@ class ExecuteTest < Test::Unit::TestCase
   end
 
   def test_getbikestation_fromadshel_isnotempty
-    bike_station = Execute.get_bike_station_yield(4) {|id| Execute.web_open_xml(id) }
+    bike_station = Execute.get_bike_station(4)
     puts bike_station
     assert_not_equal nil, bike_station.empty_locks
   end

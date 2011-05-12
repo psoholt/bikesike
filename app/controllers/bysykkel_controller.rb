@@ -6,12 +6,14 @@ class BysykkelController < ActionController::Base
 #  protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   def station
-    @bike_station = Execute.get_bike_station(params[:id])
+    cache_helper = get_cache_helper
+    @bike_station = Execute.get_bike_station(params[:id], cache_helper)
     
     respond_to do |format|
         format.xml  { render :xml => @bike_station }
         format.json { render :json => @bike_station }
     end
+    put_cache_helper cache_helper
   end
 
   def testcache
@@ -35,26 +37,30 @@ class BysykkelController < ActionController::Base
 
   def all
     # med id, long, lat (+ bikes and locks and online)
-    #@allstations = Execute.get_all_stations()
-    @allstations = Execute.get_all_stations
+    cache_helper = get_cache_helper
+    @allstations = Execute.get_all_stations cache_helper
 
     respond_to do |format|
         format.json { render :json => @allstations }
     end
+    put_cache_helper cache_helper
   end
 
   private
   def get_cache_helper
-    rails_cache = Rails.cache.read("cache_helper")
-    rails_cache_hash = rails_cache.all.dup unless rails_cache.nil?
+    rails_cache_hash_frozen = Rails.cache.read("cache_helper")
+    rails_cache_hash = nil
+    unless(rails_cache_hash_frozen.nil?)
+      rails_cache_hash = rails_cache_hash_frozen.dup
+    end
     if rails_cache_hash.nil?
       rails_cache_hash = Hash.new
     end
     CacheHelper.new rails_cache_hash
   end
 
-  def put_cache_helper cache_helper
-    Rails.cache.write("cache_helper", cache_helper) unless Rails.cache.nil?
+  def put_cache_helper bike_hash
+    Rails.cache.write("cache_helper", bike_hash.get_all) unless Rails.cache.nil?
   end
 
 end

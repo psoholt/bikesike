@@ -43,18 +43,25 @@ class Execute
     Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(yield(id)) , id )
   end
 
-  def Execute.get_bike_station(id)
-    Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(Execute.web_open_xml(id)) , id )
+  def Execute.get_bike_station(id, cache_helper = nil)
+    if cache_helper.nil?
+      return Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(Execute.web_open_xml(id)), id)
+    end
+    if(cache_helper.get(id).nil?)
+      bike_station = Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(Execute.web_open_xml(id)), id)
+      cache_helper.put(bike_station) unless cache_helper.nil?
+    end
+    cache_helper.get(id)
   end
 
-  def Execute.get_all_stations
-    station_numbers = Execute.get_all_station_numbers
+  def Execute.get_all_stations(cache_helper = nil)
+    station_numbers = Execute.get_all_station_numbers cache_helper
     bike_stations = []
-    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x) }
+    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper) }
     bike_stations
   end
 
-  def Execute.get_all_station_numbers()
+  def Execute.get_all_station_numbers(cache_helper = nil)
     Execute.initialize_bikestations_from_xml( Execute.get_all_xml(Execute.web_open_all_xml))
   end
 
