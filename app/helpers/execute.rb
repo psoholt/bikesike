@@ -79,7 +79,7 @@ class Execute
   end
 
   def Execute.get_all_within_area_updated(swlat, swlng, nelat, nelng, cache_helper = nil)
-    stations_within_area = Execute.get_all_within_area swlng, swlat, nelng, nelat, cache_helper
+    stations_within_area = Execute.get_all_within_area swlat, swlng, nelat, nelng, cache_helper
     stations_within_area_updated = Array.new
     stations_within_area.each { |station| stations_within_area_updated << Execute.get_bike_station(station.id,cache_helper,true)}
     stations_within_area_updated
@@ -90,15 +90,17 @@ class Execute
     stations_within_area = Array.new
     all_stations.each do | station |
       bike_longitude = station.longitude.to_f
+      #puts "long: "+ bike_longitude.to_s + ">" +swlng.to_s + " and "+ bike_longitude.to_s + "<" + nelng.to_s
       if bike_longitude > swlng and bike_longitude < nelng
         bike_latitude = station.latitude.to_f
+        #puts "lat: "+bike_latitude.to_s + ">" +swlat.to_s + " and "+ bike_latitude.to_s + "<" + nelat.to_s
         if bike_latitude > swlat and bike_latitude < nelat
+          #puts "true"
           stations_within_area << station
         end
       end
-      stations_within_area
     end
-
+    stations_within_area
   end
 
   def Execute.open_xml_from_file (number, relative_path = "./" )
