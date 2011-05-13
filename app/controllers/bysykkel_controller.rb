@@ -24,6 +24,7 @@ class BysykkelController < ActionController::Base
   end
 
   def allwithinarea
+    cache_helper = get_cache_helper
     sw_lng = params[:swlng]
     sw_lat = params[:swlat]
     ne_lng = params[:nelng]
@@ -32,9 +33,13 @@ class BysykkelController < ActionController::Base
     puts "sw_lat" + sw_lat.to_s
     puts "ne_lng" + ne_lng.to_s
     puts "ne_lat" + ne_lat.to_s
+    
+    bikes_within_area = Execute.get_all_within_area(sw_lng, sw_lat, ne_lng, ne_lat, cache_helper)
+
     respond_to do |format|
-        format.json { render :json => params }
+        format.json { render :json => bikes_within_area }
     end
+    put_cache_helper cache_helper
   end
 
 # def getallfromlocation (topLeft, bottomRight)
