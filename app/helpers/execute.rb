@@ -78,12 +78,19 @@ class Execute
     Execute.initialize_bikestations_from_xml( Execute.get_all_xml(Execute.web_open_all_xml))
   end
 
-  def Execute.get_all_within_area(swlng, swlat, nelng, nelat, cache_helper = nil)
+  def Execute.get_all_within_area_updated(swlat, swlng, nelat, nelng, cache_helper = nil)
+    stations_within_area = Execute.get_all_within_area swlng, swlat, nelng, nelat, cache_helper
+    stations_within_area_updated = Array.new
+    stations_within_area.each { |station| stations_within_area_updated << Execute.get_bike_station(station.id,cache_helper,true)}
+    stations_within_area_updated
+  end
+
+  def Execute.get_all_within_area(swlat, swlng, nelat, nelng, cache_helper = nil)
     all_stations = Execute.get_all_stations cache_helper
     stations_within_area = Array.new
     all_stations.each do | station |
       bike_longitude = station.longitude.to_f
-      if bike_longitude < swlng and bike_longitude > nelng
+      if bike_longitude > swlng and bike_longitude < nelng
         bike_latitude = station.latitude.to_f
         if bike_latitude > swlat and bike_latitude < nelat
           stations_within_area << station

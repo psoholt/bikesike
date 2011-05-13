@@ -16,25 +16,25 @@ class BysykkelController < ActionController::Base
     put_cache_helper cache_helper
   end
 
-  def testcache
-    cache_helper = get_cache
-#    cache_helper = Rails.cache.read("cache_helper")
-    puts cache_helper.get_all.to_s
-    cache_helper.put(BikeStation.new cache_helper.get_all.count)
-  end
+#  def testcache
+#    cache_helper = get_cache
+##    cache_helper = Rails.cache.read("cache_helper")
+#    puts cache_helper.get_all.to_s
+#    cache_helper.put(BikeStation.new cache_helper.get_all.count)
+#  end
 
   def allwithinarea
     cache_helper = get_cache_helper
-    sw_lng = params[:swlng]
-    sw_lat = params[:swlat]
-    ne_lng = params[:nelng]
-    ne_lat = params[:nelat]
-    puts "sw_lng" + sw_lng.to_s
-    puts "sw_lat" + sw_lat.to_s
-    puts "ne_lng" + ne_lng.to_s
-    puts "ne_lat" + ne_lat.to_s
-    
-    bikes_within_area = Execute.get_all_within_area(sw_lng, sw_lat, ne_lng, ne_lat, cache_helper)
+    sw_lat = params[:swlat].to_f
+    sw_lng = params[:swlng].to_f
+    ne_lat = params[:nelat].to_f
+    ne_lng = params[:nelng].to_f
+#    puts "sw_lat" + sw_lat.to_s
+#    puts "sw_lng" + sw_lng.to_s
+#    puts "ne_lat" + ne_lat.to_s
+#    puts "ne_lng" + ne_lng.to_s
+
+    bikes_within_area = Execute.get_all_within_area_updated(sw_lat, sw_lng, ne_lat, ne_lng, cache_helper)
 
     respond_to do |format|
         format.json { render :json => bikes_within_area }
