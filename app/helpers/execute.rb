@@ -63,10 +63,10 @@ class Execute
       bikehash.values.each { |x| bike_stations << x }
       #puts "values"+bike_stations.to_s
       #return bike_stations if bike_stations.count > 100
-      return bike_stations if bike_stations.count > 10
+      return bike_stations if bike_stations.count > 100
     end
     station_numbers = Execute.get_all_station_numbers cache_helper
-    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper, false) if x < 12 }
+    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper, false) } #if x < 12 }
     bike_stations
   end
 
