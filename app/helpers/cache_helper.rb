@@ -11,16 +11,17 @@ class CacheHelper
   def put(an_object)
     if an_object.instance_variable_defined?(:@id)
       @bikehash[an_object.id] = an_object
-      puts @bikehash
+      #puts @bikehash
     end
+    an_object
   end
 
-  def get(id)
+  def get(id, use_updated_cache = true)
     bike_station = @bikehash[id]
-    puts id
-    puts bike_station
+    #puts id
+    #puts bike_station
     return nil if bike_station.nil?
-    return nil if bike_station.seconds_since_creation > @@cache_time_seconds
+    return nil if use_updated_cache and bike_station.seconds_since_creation > @@cache_time_seconds
     bike_station
   end
 

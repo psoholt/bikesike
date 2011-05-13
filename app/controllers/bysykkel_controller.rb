@@ -23,6 +23,20 @@ class BysykkelController < ActionController::Base
     cache_helper.put(BikeStation.new cache_helper.get_all.count)
   end
 
+  def allwithinarea
+    sw_lng = params[:swlng]
+    sw_lat = params[:swlat]
+    ne_lng = params[:nelng]
+    ne_lat = params[:nelat]
+    puts "sw_lng" + sw_lng.to_s
+    puts "sw_lat" + sw_lat.to_s
+    puts "ne_lng" + ne_lng.to_s
+    puts "ne_lat" + ne_lat.to_s
+    respond_to do |format|
+        format.json { render :json => params }
+    end
+  end
+
 # def getallfromlocation (topLeft, bottomRight)
 # return json with locks and bikes for all stations
 
@@ -47,7 +61,7 @@ class BysykkelController < ActionController::Base
     respond_to do |format|
         format.json { render :json => @allstations }
     end
-    puts @allstations
+    #puts @allstations
     put_cache_helper cache_helper
   end
 
@@ -61,7 +75,7 @@ class BysykkelController < ActionController::Base
     if rails_cache_hash.nil?
       rails_cache_hash = Hash.new
     end
-    puts rails_cache_hash.to_s
+    #puts rails_cache_hash.to_s
     CacheHelper.new rails_cache_hash
   end
 

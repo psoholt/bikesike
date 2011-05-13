@@ -43,30 +43,30 @@ class Execute
     Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(yield(id)) , id )
   end
 
-  def Execute.get_bike_station(id, cache_helper = nil)
+  def Execute.get_bike_station(id, cache_helper = nil, use_updated_cache = true)
     if cache_helper.nil?
       return Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(Execute.web_open_xml(id)), id)
     end
-    if(cache_helper.get(id).nil?)
+    cached_bike = cache_helper.get(id, use_updated_cache)
+    if(cached_bike.nil?)
       bike_station = Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(Execute.web_open_xml(id)), id)
-      cache_helper.put(bike_station) unless cache_helper.nil?
+      cached_bike = cache_helper.put(bike_station)
     end
-    cache_helper.get(id)
+    cached_bike
   end
 
   def Execute.get_all_stations(cache_helper = nil)
     bike_stations = []
     unless(cache_helper.nil?)
       bikehash = cache_helper.get_all
-      puts "bikehash" + bikehash.to_s
-      bikehash.each { |x| bike_stations << x }
-      puts "values"+bike_stations.to_s
-      return bike_stations if bike_stations.count > 100
+      #puts "bikehash" + bikehash.to_s
+      bikehash.values.each { |x| bike_stations << x }
+      #puts "values"+bike_stations.to_s
+      #return bike_stations if bike_stations.count > 100
+      return bike_stations if bike_stations.count > 10
     end
-
     station_numbers = Execute.get_all_station_numbers cache_helper
-    return station_numbers unless station_numbers.empty?
-    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper) }
+    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper, false) if x < 12 }
     bike_stations
   end
 
@@ -78,6 +78,21 @@ class Execute
     Execute.initialize_bikestations_from_xml( Execute.get_all_xml(Execute.web_open_all_xml))
   end
 
+  def Execute.get_all_within_area(swlng, swlat, nelng, nelat, cache_helper = nil)
+    all_stations = Execute.get_all_stations cache_helper
+    stations_within_area = Array.new
+    all_stations.each do | station |
+      bike_longitude = station.longitude.to_f
+      if bike_longitude < swlng and bike_longitude > nelng
+        bike_latitude = station.latitude.to_f
+        if bike_latitude > swlat and bike_latitude < nelat
+          stations_within_area << station
+        end
+      end
+      stations_within_area
+    end
+
+  end
 
   def Execute.open_xml_from_file (number, relative_path = "./" )
     File.read(relative_path+"bikexmlexample"+number.to_s+".xml")

@@ -83,9 +83,28 @@ class ExecuteTest < Test::Unit::TestCase
     puts bike_stations
   end
 
-  def test_get_all_stations_isnotempty
+  def test_get_all_stations_isnil
     bike_stations = Execute.get_all_stations
-    puts bike_stations
+    assert_equal(nil, bike_stations)
   end
-  
+
+  def test_get_all_stations_isnotempty
+    bike_stations = Execute.get_all_stations CacheMock.new
+    assert_equal(nil, bike_stations)
+  end
+
+  class CacheMock
+    def get_all
+      return { 1 => BikeStation.new(1), 2 => BikeStation.new(2)}
+    end
+  end
+
+  def test_getbikestation_fromxmlfile_longitudetodec
+    bike_station = Execute.get_bike_station_yield(3) {|id| Execute.open_xml_from_file(id, File.dirname($0)+"/") }
+    puts bike_station
+    puts bike_station.latitude.to_f.to_s
+    puts (bike_station.latitude.to_f < 2.4).to_s
+
+  end
+
 end

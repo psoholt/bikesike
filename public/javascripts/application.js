@@ -107,8 +107,8 @@ var BikeSike = Class.create({
 			var bounds = this.map.getBounds(),
 				ne = bounds.getNorthEast(),
 				sw = bounds.getSouthWest(),
-				coords = $H({"sw": sw.lat() + "," + sw.lng(), "ne": ne.lat() + "," + ne.lng()}).toQueryString();
-			new Ajax.Request('/bysykkel/getallfromlocation?' + coords, {
+				coords = $H({"swlat": sw.lat(), "swlng": sw.lng(), "nelat": ne.lat(), "nelng" : ne.lng()}).toQueryString();
+			new Ajax.Request('/bysykkel/allwithinarea?' + coords, {
 				method: 'get',
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
