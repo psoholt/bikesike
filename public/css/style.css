@@ -60,8 +60,8 @@ body { height: 100%; margin: 0px; padding: 0px }
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 32px;
-	line-height: 32px;
+	height: 28px;
+	line-height: 28px;
 	z-index: 1;	
 	text-align: center;
 	list-style: none;
@@ -75,9 +75,9 @@ body { height: 100%; margin: 0px; padding: 0px }
 }
 .icon {
 	background: url(/images/icons.png) no-repeat 999em 999em;
-	line-height: 32px;
-	height: 32px;
-	width: 32px;
+	line-height: 28px;
+	height: 28px;
+	width: 28px;
 	position: relative;
 }
 .icon-lock {
@@ -87,12 +87,12 @@ body { height: 100%; margin: 0px; padding: 0px }
 }
 .icon-bike {
 	float: left;
-	background-position: -300px 50%;
+	background-position: -20px 50%;
 	width: 25px;
 }
 .data {
 	position: absolute;
-	top: 7px;
+	top: 5px;
 	right: 0;
 	padding: 2px 10px;
 	line-height: 100%;
@@ -206,5 +206,5 @@ body { height: 100%; margin: 0px; padding: 0px }
 	width: 32px;
 	height: 32px;
 	margin: 5px;
-	background: url(/images/icons.png) no-repeat -600px 0;
+	background: url(/images/icons.png) no-repeat -50px 0;
 }

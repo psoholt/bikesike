@@ -113,28 +113,6 @@ var BikeSike = Class.create({
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
 		}
-		return;
-		// logging stuff
-		var visible = 0;
-		this.racks.each(function(rack) {
-			if (rack.marker && rack.marker.getVisible())
-				visible++;
-		});
-		log(visible, " visible racks");
-		
-		this.racks.each(function(rack) {
-			if (rack.infoWindowOpen) {
-				setTimeout(function() {
-					var iwHeight = $(rack.infoWindow.getContent().parentNode).getHeight(),
-						iwWidth = $(rack.infoWindow.getContent().parentNode).getWidth(),
-						bodyHeight = $(document.body).getHeight(),
-						lHeight = $("locate").getHeight(),
-						diff = bodyHeight - iwHeight -lHeight;
-					alert("iwW: " + iwWidth + ", iwH: " + iwHeight + ", body: " + bodyHeight + ", locate: " + lHeight + ", diff: " + diff);
-				}, 1000);
-			}
-		});
-		
 	},
 	initRacks: function() {
 		this.racks = $A();
@@ -323,16 +301,23 @@ var Rack = Class.create({
 			this.marker.setVisible(visibility);
 		}
 	},
-	requestData: function() {
-		this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+	showLoading: function() {
 		if (this.infoWindow) {
 			$(this.infoWindow.getContent()).addClassName("loading");
 		}
 	},
-	updateDataFromAjax: function(jsonData) {
+	hideLoading: function() {
 		if (this.infoWindow) {
 			$(this.infoWindow.getContent()).removeClassName("loading");
 		}
+	},
+	requestData: function() {
+		this.provider.getRackData(this.id, this.updateDataFromAjax.bindAsEventListener(this));
+		this.showLoading();
+	},
+	updateDataFromAjax: function(jsonData) {
+		this.hideLoading();
+		this.updateProperty("online",      jsonData.online);
 		this.updateProperty("bikes",       jsonData.ready_bikes);
 		this.updateProperty("locks",       jsonData.empty_locks);
 		this.updateProperty("description", jsonData.description);
