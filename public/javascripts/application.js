@@ -102,21 +102,37 @@ var BikeSike = Class.create({
 		// only keep markers on map visible
 		this.racks.invoke("update");
 		
+		function coordRound(number) {
+			var factor = 10000; // 10 meter accuracy
+			return Math.round( factor * number ) / factor;
+		}
+		
 		// in modes when displaying numbered markers make sure to keep them updated when on map
 		if (this.mode !== "BOTH") {
 			var bounds = this.map.getBounds(),
 				ne = bounds.getNorthEast(),
 				sw = bounds.getSouthWest(),
-				coords = $H({"sw": sw.lat() + "," + sw.lng(), "ne": ne.lat() + "," + ne.lng()}).toQueryString();
-			new Ajax.Request('/bysykkel/getallfromlocation?' + coords, {
+				coords = $H({
+					"swlat": coordRound(sw.lat()),
+					"swlng": coordRound(sw.lng()), 
+					"nelat": coordRound(ne.lat()),
+					"nelng": coordRound(ne.lng())
+				});
+			if (this.mapBoundsRequest && 
+				this.mapBoundsRequest.transport && 
+				typeof this.mapBoundsRequest.transport.abort === "function") {
+				this.mapBoundsRequest.transport.abort();
+			}
+			this.mapBoundsRequest = new Ajax.Request('/bysykkel/allwithinarea', {
 				method: 'get',
+				parameters: coords,
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
 		}
 	},
 	initRacks: function() {
 		this.racks = $A();
-		new Ajax.Request('/bysykkel/getmany', {
+		new Ajax.Request('/bysykkel/all', {
 			method:'get',
 			onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 		});
@@ -158,7 +174,12 @@ var BikeSike = Class.create({
 	setMode: function(mode) {
 		if (/BOTH|LOCKS|BIKES/.test(mode)) {
 			this.mode = mode;
-			this.racks.invoke("update");
+			if (mode !== "BOTH") {
+				this.mapBoundsChanged();
+			}
+			else {
+				this.racks.invoke("update");
+			}
 		}
 	},
 	setCenter: function(latitude, longitude, accuracy) {
@@ -197,9 +218,25 @@ var RackProvider = Class.create({
 	initialize: function(map, getMode) {
 		this.map = map;
 		this.mode = getMode;
+		
+		this.updateMapBounds();
+		google.maps.event.addListener(this.map, 'bounds_changed', this.updateMapBounds.bind(this));
+		
+	},
+	updateMapBounds: function() {
+		var bounds = this.map.getBounds();
+		if (bounds) {
+			bounds.ne     = bounds.getNorthEast();
+			bounds.sw     = bounds.getSouthWest();
+			bounds.ne.lat = bounds.ne.lat();
+			bounds.ne.lng = bounds.ne.lng();
+			bounds.sw.lat = bounds.sw.lat();
+			bounds.sw.lng = bounds.sw.lng();
+		}	
+		this.mapBounds = bounds;
 	},
 	getRackData: function(id, callback) {
-		new Ajax.Request('/bysykkel/getjson/' + id + '.json', {
+		new Ajax.Request('/bysykkel/station/' + id + '.json', {
 			method:'get',
 			onSuccess: function(transport){
 				var json = transport.responseText.evalJSON();
@@ -221,12 +258,13 @@ var RackProvider = Class.create({
 		// http://gmaps-utility-library.googlecode.com/svn/trunk/mapiconmaker/1.1/examples/markericonoptions-wizard.html
 		// https://chart.googleapis.com/chart?chst=d_map_pin_icon_withshadow&chld=bicycle|cccccc|ffffff
 		// http://chart.apis.google.com/chart?cht=it&chs=32x32&chco=cccccc,000000ff,ffffff01&chl=a&chx=000000,0&chf=bg,s,00000000&ext=.png
-		var icon;
-		if (this.mode() === "BOTH") {
+		var url,
+			mode = this.mode();
+		if (mode === "BOTH") {
 			url = "https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=bicycle|cccccc|ffffff";
 		}
-		else if (this.mode() === "BIKES" || this.mode() === "LOCKS") {
-			url = "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=" + providerData[this.mode() === "BIKES" ? "bikes" : "locks"] + "|666666|ffffff";
+		else if (mode === "BIKES" || mode === "LOCKS") {
+			url = "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=" + providerData[mode === "BIKES" ? "bikes" : "locks"] + "|666666|ffffff";
 		}
 		return url;
 	},
@@ -237,30 +275,34 @@ var RackProvider = Class.create({
 			this.isWithinMapBounds(providerData);
 	},
 	isWithinMapBounds: function(providerData) {
-		var bounds = this.map.getBounds(),
-			ne  = bounds.getNorthEast(),
-			sw  = bounds.getSouthWest(),
+		var b  = this.mapBounds;
+		if (!b) {
+			return false;
+		}
+		var sw = b.sw,
+			ne = b.ne,
 			lng = providerData.longitude,
 			lat = providerData.latitude;
-		return sw.lat() <= lat      &&
-			        lat <= ne.lat() &&
-			   sw.lng() <= lng      &&
-			        lng <= ne.lng();
+		return b &&
+			sw.lat <= lat    &&
+			   lat <= ne.lat &&
+			sw.lng <= lng    &&
+			   lng <= ne.lng;
+	},
+	getMap: function() {
+		return this.map;
 	}
 });
 
 var Rack = Class.create({
 	initialize: function(obj, options) {
 		// properties
-		this.id          = null;
-	    this.name        = null;
+		this.id          = obj.id;
 		this.latitude    = null;
 		this.longitude   = null;
 		this.description = null;
 		this.bikes       = 0;
 		this.locks       = 0;
-
-		Object.extend(this, obj);
 
 		// map objects
 		this.infoWindow = null;
@@ -272,17 +314,23 @@ var Rack = Class.create({
 		// events hash
 		this.events = {};
 		
-		if (!this.initMarker()) {
+		this.updateDataFromAjax(obj);
+		
+		if (!this.marker) {
 			this.requestData();
 		}
 	},
 	initMarker: function() {
 		if (!this.marker && this.latitude && this.longitude) {
+			var markerIcon = this.provider.getMarkerIcon(this.toCommonObject());
 			this.marker = this.provider.getMarker({
 				position: new google.maps.LatLng(this.latitude, this.longitude),
-				icon: this.provider.getMarkerIcon(this.toCommonObject()),
+				icon: markerIcon,
 				visible: true
 			});
+			this.marker.visible = true;
+			this.marker.icon    = markerIcon;
+			
 			// add event listeners
 			google.maps.event.addListener(this.marker, 'click', this.markerClickHandler.bindAsEventListener(this));
 			
@@ -295,10 +343,14 @@ var Rack = Class.create({
 	},
 	updateMarker: function() {
 		if (this.marker) {
-			var commonObject = this.toCommonObject();
-			this.marker.setIcon(this.provider.getMarkerIcon(commonObject));
-			var visibility = this.provider.getMarkerVisibility(commonObject) || !!this.infoWindowOpen;
-			this.marker.setVisible(visibility);
+			var commonObject = this.toCommonObject(),
+				visibility   = this.provider.getMarkerVisibility(commonObject) || !!this.infoWindowOpen,
+				icon;
+			if (visibility) {
+				icon         = this.provider.getMarkerIcon(commonObject);
+			}
+			visibility === this.marker.visible       || this.marker.setVisible( this.marker.visible = visibility );
+			!visibility || icon === this.marker.icon || this.marker.setIcon( this.marker.icon = icon );
 		}
 	},
 	showLoading: function() {
@@ -317,12 +369,11 @@ var Rack = Class.create({
 	},
 	updateDataFromAjax: function(jsonData) {
 		this.hideLoading();
-		this.updateProperty("online",      jsonData.online);
-		this.updateProperty("bikes",       jsonData.ready_bikes);
-		this.updateProperty("locks",       jsonData.empty_locks);
-		this.updateProperty("description", jsonData.description);
-		this.updateProperty("longitude",   jsonData.longitude);
-		this.updateProperty("latitude",    jsonData.latitude);
+		this.updateProperty("bikes", jsonData.ready_bikes);
+		this.updateProperty("locks", jsonData.empty_locks);
+		this.description || this.updateProperty("description", jsonData.description.replace(/^[\d\-]*/, ""));
+		this.longitude   || this.updateProperty("longitude",   jsonData.longitude);
+		this.latitude    || this.updateProperty("latitude",    jsonData.latitude);
 	},
 	updateProperty: function(property, value) {
 		if (this[property] !== value) {
@@ -340,7 +391,6 @@ var Rack = Class.create({
 		}
 	},
 	markerClickHandler: function() {
-		this.requestData();
 		if (!this.infoWindow) {
 			var element = new Element("div");
 			element.insert(this.toHTML());
@@ -350,8 +400,9 @@ var Rack = Class.create({
 			});
 		}
 		this.trigger("infoWindowOpen");
-		this.infoWindow.open(app.map, this.marker);
+		this.infoWindow.open(this.provider.getMap(), this.marker);
 		this.infoWindowOpen = true;
+		this.requestData();
 	},
 	closeInfoWindow: function() {
 		if (this.infoWindow) {

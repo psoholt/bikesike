@@ -15,3 +15,8 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+require 'active_support/cache/dalli_store23'
+config.cache_store = :memory_store
+#config.cache_store = :dalli_store
+

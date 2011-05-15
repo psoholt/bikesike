@@ -1,17 +1,45 @@
 require_relative "../helpers/execute.rb"
+require_relative "../helpers/cache_helper.rb"
 
 class BysykkelController < ActionController::Base
 #  helper :all # include all helpers, all the time
 #  protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-
-  def getjson
-    @bike_station = Execute.get_bike_station(params[:id]) {|id| Execute.web_open_xml(params[:id]) }
+  def station
+    cache_helper = get_cache_helper
+    @bike_station = Execute.get_bike_station(params[:id], cache_helper)
 
     respond_to do |format|
         format.xml  { render :xml => @bike_station }
         format.json { render :json => @bike_station }
     end
+    put_cache_helper cache_helper
+  end
+
+#  def testcache
+#    cache_helper = get_cache
+##    cache_helper = Rails.cache.read("cache_helper")
+#    puts cache_helper.get_all.to_s
+#    cache_helper.put(BikeStation.new cache_helper.get_all.count)
+#  end
+
+  def allwithinarea
+    cache_helper = get_cache_helper
+    sw_lat = params[:swlat].to_f
+    sw_lng = params[:swlng].to_f
+    ne_lat = params[:nelat].to_f
+    ne_lng = params[:nelng].to_f
+#    puts "sw_lat" + sw_lat.to_s
+#    puts "sw_lng" + sw_lng.to_s
+#    puts "ne_lat" + ne_lat.to_s
+#    puts "ne_lng" + ne_lng.to_s
+
+    bikes_within_area = Execute.get_all_within_area_updated(sw_lat, sw_lng, ne_lat, ne_lng, cache_helper)
+
+    respond_to do |format|
+        format.json { render :json => bikes_within_area }
+    end
+    put_cache_helper cache_helper
   end
 
 # def getallfromlocation (topLeft, bottomRight)
@@ -26,18 +54,38 @@ class BysykkelController < ActionController::Base
 #    end
 #  end
 
-  def getmany
-    # med id, long, lat (+ bikes and locks and online)
-    #@allstations = Execute.get_all_stations()
+  def reset_cache
+    Rails.cache.write("cache_helper", Hash.new)
+  end
 
-    @racks = []
-    (1..108).each do |i|
-    #(1..10).each do |i|
-      @racks << BikeStation.new(i)
+  def all
+    # med id, long, lat (+ bikes and locks and online)
+    cache_helper = get_cache_helper
+    @allstations = Execute.get_all_stations cache_helper
+
+    respond_to do |format|
+        format.json { render :json => @allstations }
+    end
+    #puts @allstations
+    put_cache_helper cache_helper
     end
     
-    respond_to do |format|
-        format.json { render :json => @racks }
+  private
+  def get_cache_helper
+    rails_cache_hash_frozen = Rails.cache.read("cache_helper")
+    rails_cache_hash = nil
+    unless(rails_cache_hash_frozen.nil?)
+      rails_cache_hash = rails_cache_hash_frozen.dup
     end
+    if rails_cache_hash.nil?
+      rails_cache_hash = Hash.new
+    end
+    #puts rails_cache_hash.to_s
+    CacheHelper.new rails_cache_hash
+    end
+
+  def put_cache_helper cache_helper
+    Rails.cache.write("cache_helper", cache_helper.get_all) unless Rails.cache.nil? || cache_helper.nil?
   end
+
 end
