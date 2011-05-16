@@ -64,12 +64,6 @@
       </requirement>
       <source from="Gemfile" />
     </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="test-unit" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
@@ -102,6 +96,14 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] dalli (v1.0.3, /opt/local/lib/ruby1.9/gems/1.9.1/gems/dalli-1.0.3)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.0, /Users/peder/.gem/ruby/1.9.1/gems/rack-1.1.0)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] test-unit (v2.3.0, /opt/local/lib/ruby1.9/gems/1.9.1/gems/test-unit-2.3.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.2, C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.1.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activeresource (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activeresource-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activemodel (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activemodel-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activerecord-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v3.0.5, C:/Ruby191/lib/ruby/gems/1.9.1/gems/activesupport-3.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] arel (v2.0.9, C:/Ruby191/lib/ruby/gems/1.9.1/gems/arel-2.0.9)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] tzinfo (v0.3.26, C:/Ruby191/lib/ruby/gems/1.9.1/gems/tzinfo-0.3.26)" level="application" />
   </component>
 </module>
 
