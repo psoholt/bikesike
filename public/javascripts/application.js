@@ -16,7 +16,8 @@ document.observe("dom:loaded", function() {
 var BikeSike = Class.create({
 	debug: true,
 	config: {
-		defaultZoom: 13,
+		defaultZoomLevel: 13,
+		autoUpdateZoomLevel: 15,
 		defaultCenter: new google.maps.LatLng(59.91130774, 10.75086325),
 		maxDistance: 10000
 	},
@@ -34,7 +35,7 @@ var BikeSike = Class.create({
 	initMap: function () {
 		var myOptions = {
 			center: this.config.defaultCenter,
-			zoom: this.config.defaultZoom,
+			zoom: this.config.defaultZoomLevel,
 			scaleControl: true,
 			navigationControl: true,
 			mapTypeControl: false,
@@ -82,11 +83,12 @@ var BikeSike = Class.create({
 		this.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(controlDiv);
 	},
 	initZoomEvents: function() {
+		
 		google.maps.event.addListener(this.map, 'zoom_changed', function() {
 			var zoom = this.map.getZoom();
-			$$(".zoomed"  ).invoke(zoom < 14 ? "addClassName" : "removeClassName", "disabled");
-			$$(".unzoomed").invoke(zoom < 14 ? "removeClassName" : "addClassName", "disabled");
-			if (zoom < 14) {
+			$$(".zoomed"  ).invoke(zoom < this.config.autoUpdateZoomLevel ? "addClassName" : "removeClassName", "disabled");
+			$$(".unzoomed").invoke(zoom < this.config.autoUpdateZoomLevel ? "removeClassName" : "addClassName", "disabled");
+			if (zoom < this.config.autoUpdateZoomLevel) {
 				this.setMode("BOTH");
 			}
 		}.bindAsEventListener(this));
