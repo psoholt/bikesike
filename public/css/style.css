@@ -15,6 +15,9 @@ html { height: 100% }
 body { height: 100%; margin: 0px; padding: 0px }
 #map_canvas { height: 100% }
 
+/* Prevent mobile zooming while remain desktop zooming: github.com/shichuan/mobile-html5-boilerplate/issues/closed#issue/14 */
+html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; } 
+
 .rack {
 	max-width: 240px;
 	max-height: 192px;
