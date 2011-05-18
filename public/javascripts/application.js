@@ -27,9 +27,10 @@ var BikeSike = Class.create({
 		autoUpdateZoomLevel: 15,
 		defaultCenter: new google.maps.LatLng(59.91130774, 10.75086325),
 		maxDistance: 10000,
+		pinLoadingColor: "ece5db",
 		pinNoResourcesColor: "ece5db",
 		pinBikesColor: "25359c",
-		pinLocksColor: "c72222",
+		pinLocksColor: "006633",
 		pinBothColor: "cccccc"
 	},
 	initialize: function(mode) {
@@ -83,7 +84,7 @@ var BikeSike = Class.create({
 		controls.invoke("observe", "click", function(event) {
 			event.stop();
 			var target = $(event.target);
-			if (target.hasClassName("active") || target.hasClassName("disabled")) {
+			if (target.hasClassName("active")) {
 				return;
 			}
 			var mode = target.getAttribute("data-mode");
@@ -92,12 +93,8 @@ var BikeSike = Class.create({
 		this.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(controlDiv);
 	},
 	initZoomEvents: function() {
-		
 		google.maps.event.addListener(this.map, 'zoom_changed', function() {
-			var zoom = this.map.getZoom();
-			$$(".zoomed"  ).invoke(zoom < this.config.autoUpdateZoomLevel ? "addClassName" : "removeClassName", "disabled");
-			$$(".unzoomed").invoke(zoom < this.config.autoUpdateZoomLevel ? "removeClassName" : "addClassName", "disabled");
-			if (zoom < this.config.autoUpdateZoomLevel) {
+			if (this.map.getZoom() < this.config.autoUpdateZoomLevel) {
 				this.setMode("BOTH");
 			}
 		}.bindAsEventListener(this));
@@ -134,14 +131,11 @@ var BikeSike = Class.create({
 				typeof this.mapBoundsRequest.transport.abort === "function") {
 				this.mapBoundsRequest.transport.abort();
 			}
-			setTimeout(function() {
-				
 			this.mapBoundsRequest = new Ajax.Request('/bysykkel/allwithinarea', {
 				method: 'get',
 				parameters: coords,
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
-			}.bind(this), 5000);
 		}
 	},
 	initRacks: function() {
@@ -189,7 +183,12 @@ var BikeSike = Class.create({
 		if (/BOTH|LOCKS|BIKES/.test(mode)) {
 			this.mode = mode;
 			if (mode !== "BOTH") {
-				this.mapBoundsChanged();
+				if (this.map.getZoom() < this.config.autoUpdateZoomLevel) {
+					this.map.setZoom(this.config.autoUpdateZoomLevel);
+				}
+				else {
+					this.mapBoundsChanged();
+				}
 			}
 			else {
 				this.racks.invoke("update");
@@ -287,21 +286,25 @@ var RackProvider = Class.create({
 			chartLetter = "",
 			chartBgColor,
 			chartFgColor = "ffffff";
-		
 		if (mode === "BOTH") {
 			chartType = "d_map_pin_icon";
 			chartLetter = "bicycle";
 			chartBgColor = this.config.pinBothColor;
 		}
 		else if (mode === "BIKES" || mode === "LOCKS") {
-			var chartLetter = providerData[mode === "BIKES" ? "bikes" : "locks"];
-			if (chartLetter === 0) {
-				chartLetter = "x";
-				chartFgColor = "000000";
-				chartBgColor = this.config.pinNoResourcesColor;
+			if (typeof providerData.bikes === "undefined" || typeof providerData.locks === "undefined") {
+				chartBgColor = this.config.pinLoadingColor;
 			}
 			else {
-				chartBgColor = this.config[mode === "BIKES" ? "pinBikesColor" : "pinLocksColor"];
+				chartLetter = providerData[mode === "BIKES" ? "bikes" : "locks"];
+				if (chartLetter === 0) {
+					chartLetter = "x";
+					chartFgColor = "000000";
+					chartBgColor = this.config.pinNoResourcesColor;
+				}
+				else {
+					chartBgColor = this.config[mode === "BIKES" ? "pinBikesColor" : "pinLocksColor"];
+				}
 			}
 		}
 		url = "https://chart.googleapis.com/chart?chst=" + chartType + "&chld=" + chartLetter + "|" + chartBgColor + "|" + chartFgColor;
@@ -337,8 +340,6 @@ var Rack = Class.create({
 		this.latitude    = null;
 		this.longitude   = null;
 		this.description = null;
-		this.bikes       = 0;
-		this.locks       = 0;
 
 		// map objects
 		this.infoWindow = null;
@@ -350,7 +351,9 @@ var Rack = Class.create({
 		// events hash
 		this.events = {};
 		
-		this.updateDataFromAjax(obj);
+		// init rack properties (only init position)
+		this.updateProperty("longitude",   obj.longitude);
+		this.updateProperty("latitude",    obj.latitude);
 		
 		if (!this.marker) {
 			this.requestData();
