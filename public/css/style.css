@@ -195,7 +195,7 @@ html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 	cursor: default;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 480px) {
 	.control {
 		font-size: .875em;
 		padding: 4px 8px;

@@ -1,5 +1,12 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+/*
+ * The Bysykkel javascript application
+ * Displaying status of all bysykkel racks in Oslo, Norway
+ *
+ * @author	Anders Karlsson, andersk2@gmail.com
+ */
+
 
 function log() {
 	if (window.app && window.app.debug && window.console && window.console.log) {
@@ -19,14 +26,18 @@ var BikeSike = Class.create({
 		defaultZoomLevel: 13,
 		autoUpdateZoomLevel: 15,
 		defaultCenter: new google.maps.LatLng(59.91130774, 10.75086325),
-		maxDistance: 10000
+		maxDistance: 10000,
+		pinNoResourcesColor: "ece5db",
+		pinBikesColor: "25359c",
+		pinLocksColor: "c72222",
+		pinBothColor: "cccccc"
 	},
 	initialize: function(mode) {
 		this.mode = mode; // BOTH, BIKES, LOCKS
 		
 		this.initMap();
 		
-		this.rackProvider = new RackProvider(this.map, function() {
+		this.rackProvider = new RackProvider(this.config, this.map, function() {
 			return this.mode;
 		}.bind(this));
 		
@@ -77,8 +88,6 @@ var BikeSike = Class.create({
 			}
 			var mode = target.getAttribute("data-mode");
 			this.setMode(mode);
-			controls.invoke("removeClassName", "active");
-			target.addClassName("active");
 		}.bindAsEventListener(this));
 		this.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(controlDiv);
 	},
@@ -125,11 +134,14 @@ var BikeSike = Class.create({
 				typeof this.mapBoundsRequest.transport.abort === "function") {
 				this.mapBoundsRequest.transport.abort();
 			}
+			setTimeout(function() {
+				
 			this.mapBoundsRequest = new Ajax.Request('/bysykkel/allwithinarea', {
 				method: 'get',
 				parameters: coords,
 				onSuccess: this.addOrUpdateRacksFromAjax.bind(this)
 			});
+			}.bind(this), 5000);
 		}
 	},
 	initRacks: function() {
@@ -182,6 +194,13 @@ var BikeSike = Class.create({
 			else {
 				this.racks.invoke("update");
 			}
+			var controls = $$("#modeControls .control");
+			controls.invoke("removeClassName", "active");
+			controls.each(function(control) {
+				if (control.getAttribute("data-mode") === mode) {
+					control.addClassName("active");
+				}
+			});
 		}
 	},
 	setCenter: function(latitude, longitude, accuracy) {
@@ -217,13 +236,15 @@ var BikeSike = Class.create({
 });
 
 var RackProvider = Class.create({
-	initialize: function(map, getMode) {
-		this.map = map;
-		this.mode = getMode;
+	initialize: function(config, map, getMode) {
+		this.config = config;
+		this.map    = map;
+		this.mode   = getMode;
+		
+		this.GOOGLECHARTS = 
 		
 		this.updateMapBounds();
 		google.maps.event.addListener(this.map, 'bounds_changed', this.updateMapBounds.bind(this));
-		
 	},
 	updateMapBounds: function() {
 		var bounds = this.map.getBounds();
@@ -261,20 +282,33 @@ var RackProvider = Class.create({
 		// https://chart.googleapis.com/chart?chst=d_map_pin_icon_withshadow&chld=bicycle|cccccc|ffffff
 		// http://chart.apis.google.com/chart?cht=it&chs=32x32&chco=cccccc,000000ff,ffffff01&chl=a&chx=000000,0&chf=bg,s,00000000&ext=.png
 		var url,
-			mode = this.mode();
+			mode = this.mode(),
+			chartType = "d_map_pin_letter",
+			chartLetter = "",
+			chartBgColor,
+			chartFgColor = "ffffff";
+		
 		if (mode === "BOTH") {
-			url = "https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=bicycle|cccccc|ffffff";
+			chartType = "d_map_pin_icon";
+			chartLetter = "bicycle";
+			chartBgColor = this.config.pinBothColor;
 		}
 		else if (mode === "BIKES" || mode === "LOCKS") {
-			url = "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=" + providerData[mode === "BIKES" ? "bikes" : "locks"] + "|666666|ffffff";
+			var chartLetter = providerData[mode === "BIKES" ? "bikes" : "locks"];
+			if (chartLetter === 0) {
+				chartLetter = "x";
+				chartFgColor = "000000";
+				chartBgColor = this.config.pinNoResourcesColor;
+			}
+			else {
+				chartBgColor = this.config[mode === "BIKES" ? "pinBikesColor" : "pinLocksColor"];
+			}
 		}
+		url = "https://chart.googleapis.com/chart?chst=" + chartType + "&chld=" + chartLetter + "|" + chartBgColor + "|" + chartFgColor;
 		return url;
 	},
 	getMarkerVisibility: function(providerData) {
-		return (app.mode === "BOTH" || 
-			(app.mode === "BIKES" && providerData.bikes > 0) ||
-			(app.mode === "LOCKS" && providerData.locks > 0)) &&
-			this.isWithinMapBounds(providerData);
+		return this.isWithinMapBounds(providerData);
 	},
 	isWithinMapBounds: function(providerData) {
 		var b  = this.mapBounds;
