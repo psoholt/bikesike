@@ -17,6 +17,6 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 require 'active_support/cache/dalli_store23'
-#config.cache_store = :memory_store
-config.cache_store = :dalli_store
+config.cache_store = :memory_store
+#config.cache_store = :dalli_store
 #config.action_controller.session_store = :dalli_store
