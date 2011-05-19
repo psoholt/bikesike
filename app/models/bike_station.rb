@@ -1,6 +1,7 @@
 require 'json'
 #require 'xml'
 require_relative '../helpers/auto_json.rb'
+require_relative './bike_light.rb'
 #require 'auto_xml.rb'
 
 class BikeStation
@@ -33,5 +34,9 @@ class BikeStation
 
   def seconds_since_creation
     Time.now.to_i- @time_created.to_i
+  end
+
+  def to_bike_light
+    return BikeLight.new(id, longitude, latitude)
   end
 end

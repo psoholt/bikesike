@@ -104,7 +104,15 @@ class ExecuteTest < Test::Unit::TestCase
     puts bike_station
     puts bike_station.latitude.to_f.to_s
     puts (bike_station.latitude.to_f < 2.4).to_s
-
   end
+
+  def test_bike_station_to_light
+    bike_station = Execute.get_bike_station_yield(3) {|id| Execute.open_xml_from_file(id, File.dirname($0)+"/") }
+    bike_light = bike_station.to_bike_light
+    assert_equal(bike_station.id, bike_light.id)
+    assert_equal(bike_station.longitude, bike_light.longitude)
+    assert_equal(bike_station.latitude, bike_light.latitude)
+  end
+
 
 end
