@@ -61,13 +61,13 @@ class Execute
     unless(cache_helper.nil?)
       bikehash = cache_helper.get_all
       #puts "bikehash" + bikehash.to_s
-      bikehash.values.each { |x| bike_stations << x.to_bike_light }
+      bikehash.values.each { |x| bike_stations << x }
       #puts "values"+bike_stations.to_s
       #return bike_stations if bike_stations.count > 100
       return bike_stations if bike_stations.count > 100
     end
     station_numbers = Execute.get_all_station_numbers cache_helper
-    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper, false).to_bike_light } #if x < 12 }
+    station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper, false) } #if x < 12 }
     bike_stations
   end
 

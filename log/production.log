@@ -1,0 +1,37 @@
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-19 13:57:21) [GET]
+localhost:11211 failed (count: 0)
+localhost:11211 failed (count: 1)
+localhost:11211 is down
+DalliError: No server available
+localhost:11211 failed (count: 2)
+DalliError: No server available
+Completed in 7502ms (View: 24, DB: 0) | 200 OK [http://localhost/bysykkel/all]
+Session::DalliStore#get: Response error 32: Authentication required
+mc2.ec2.northscale.net:11211 failed (count: 0)
+mc2.ec2.northscale.net:11211 failed (count: 1)
+mc2.ec2.northscale.net:11211 is down
+Session::DalliStore#set: No server available
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-19 13:57:40) [GET]
+localhost:11211 failed (count: 3)
+DalliError: No server available
+localhost:11211 failed (count: 4)
+DalliError: No server available
+Completed in 6904ms (View: 19, DB: 0) | 200 OK [http://localhost/bysykkel/all]
+mc2.ec2.northscale.net:11211 is back (downtime was 17.757 seconds)
+Session::DalliStore#get: Response error 32: Authentication required
+mc2.ec2.northscale.net:11211 failed (count: 0)
+mc2.ec2.northscale.net:11211 failed (count: 1)
+mc2.ec2.northscale.net:11211 is down
+Session::DalliStore#set: No server available
+
+
+Processing BysykkelController#all (for 127.0.0.1 at 2011-05-19 13:57:50) [GET]
+localhost:11211 failed (count: 5)
+DalliError: No server available
+localhost:11211 failed (count: 6)
+DalliError: No server available
+Completed in 6254ms (View: 19, DB: 0) | 200 OK [http://localhost/bysykkel/all]
