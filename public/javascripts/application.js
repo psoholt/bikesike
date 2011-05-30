@@ -25,6 +25,7 @@ var BikeSike = Class.create({
 	config: {
 		defaultZoomLevel: 13,
 		autoUpdateZoomLevel: 15,
+		normalResolution: 320*460,
 		defaultCenter: new google.maps.LatLng(59.91130774, 10.75086325),
 		maxDistance: 10000,
 		pinLoadingColor: "ece5db",
@@ -67,6 +68,13 @@ var BikeSike = Class.create({
 		this.addModeControls();
 		
 		this.addLocationControl();
+		
+		this.updateZoomLevelLimits();
+	},
+	updateZoomLevelLimits: function(){
+		var dimensions = $("map_canvas").getDimensions();
+		this.config.autoUpdateZoomLevel += 
+			Math.floor(dimensions.width * dimensions.height / this.config.normalResolution / 4);
 	},
 	addLocationControl: function() {
 		if (navigator.geolocation) {
