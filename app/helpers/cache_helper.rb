@@ -32,6 +32,10 @@ class CacheHelper
     bike_ids
   end
 
+  def is_mock?
+    false
+  end
+
   def get_all
     @bikehash
   end

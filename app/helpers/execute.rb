@@ -10,7 +10,7 @@ class Execute
   def Execute.web_open_all_xml()
     open("http://smartbikeportal.clearchannel.no/public/mobapp/maq.asmx/getRacks")
   end
-  
+
   def Execute.web_open_xml(number)
     # open("http://www.adshel.no/js/getracknr.php?id="+number.to_s)
     open("http://smartbikeportal.clearchannel.no/public/mobapp/maq.asmx/getRack?id="+number.to_s)
@@ -28,17 +28,17 @@ class Execute
     tekst = ""
     data = Execute.web_open_all_xml() if data.nil?
     data.each_line { |f| tekst+= f }
-    tekst = tekst.gsub("&lt;", "<").gsub("&gt;", ">") 
+    tekst = tekst.gsub("&lt;", "<").gsub("&gt;", ">")
     Document.new(tekst)
-  end 
+  end
 
   def Execute.get_stativ_xml(data)
     tekst = ""
     data = Execute.web_open_xml(id) if data.nil?
     data.each_line { |f| tekst+= f }
-    tekst = tekst.gsub("&lt;", "<").gsub("&gt;", ">") 
+    tekst = tekst.gsub("&lt;", "<").gsub("&gt;", ">")
     Document.new(tekst)
-  end 
+  end
 
   def Execute.get_bike_station_yield(id)
     Execute.initialize_bikestation_from_xml(Execute.get_stativ_xml(yield(id)) , id )
@@ -64,7 +64,7 @@ class Execute
       bikehash.values.each { |x| bike_stations << x }
       #puts "values"+bike_stations.to_s
       #return bike_stations if bike_stations.count > 100
-      return bike_stations if bike_stations.count > 100
+      return bike_stations if bike_stations.count > 100 || cache_helper.is_mock?
     end
     station_numbers = Execute.get_all_station_numbers cache_helper
     station_numbers.each {|x| bike_stations << Execute.get_bike_station(x, cache_helper, false) } #if x < 12 }
@@ -102,6 +102,18 @@ class Execute
       end
     end
     stations_within_area
+  end
+
+  def Execute.get_closest_sorted_stations(lat, lng, cache_helper = nil)
+    all_stations = Execute.get_all_stations cache_helper
+    stationHash = Hash.new()
+    all_stations.each do | station |
+      puts "kjorer igjennom"
+       length = Math.sqrt((station.longitude.to_f-lng.to_f)**2+(station.latitude.to_f-lat.to_f)**2)
+       puts length
+       stationHash[length] = station
+    end
+    stationHash
   end
 
   def Execute.open_xml_from_file (number, relative_path = "./" )

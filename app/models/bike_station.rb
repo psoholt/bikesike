@@ -12,7 +12,7 @@ class BikeStation
 
   def initialize(id)
     @time_created = Time.now
-    @id = id;
+    @id = id
   end
 
   def to_s
