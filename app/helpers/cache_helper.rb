@@ -25,9 +25,6 @@ class CacheHelper
     bike_station
   end
 
-
-
-  
   def get_bike_ids
     bike_ids = []
     return bike_ids if @bikehash.nil? || @bikehash.count < 100
