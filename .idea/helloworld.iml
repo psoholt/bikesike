@@ -76,9 +76,9 @@
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.0.13, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionmailer (v2.3.8, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v1.5.1, Ruby SDK 1.9.1-p430) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack (v1.1.2, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v0.8.7, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord-nulldb-adapter (v0.2.1, Ruby SDK 1.9.1-p430) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v1.1.2, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails (v2.3.8, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionpack (v2.3.8, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activeresource (v2.3.8, Ruby SDK 1.9.1-p430) [gem]" level="application" />
