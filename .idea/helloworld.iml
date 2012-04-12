@@ -86,5 +86,9 @@
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v2.3.8, Ruby SDK 1.9.1-p430) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v2.3.8, Ruby SDK 1.9.1-p430) [gem]" level="application" />
   </component>
+  <component name="RModuleSettingsStorage">
+    <LOAD_PATH number="0" />
+    <I18N_FOLDERS number="1" string0="$MODULE_DIR$/config/locales" />
+  </component>
 </module>
 
